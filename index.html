@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Polar Explorer WebApp</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Londrina Outline' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="main.css" type="text/css">
+  <link rel="shortcut icon" href="favicon.ico" />
+  <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+  <script src="https://openlayers.org/en/v4.6.5/build/ol-debug.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="https://npmcdn.com/csv2geojson@latest/csv2geojson.js"></script>
+  <script type="text/javascript" src="mapOverlays.json"></script>
+  <script type="text/javascript" src="placeNames.json"></script>
+  <script type="text/javascript" src="placeNameFeatures.json"></script>
+  <script type="text/javascript" src="map.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+  <!-- <script type="text/javascript" src="jquery.ajax-cross-origin.min.js"></script> -->
+</head>
+
+<body>
+<div class="wrapper">
+  <div id="demo"></div>
+  <div id="hidden_map" class="map-div"></div>
+  <div id="map" class="map-div">
+
+
+    <div hidden id="col_sq" style="width:100px; height:100px; left: 20em; top: 10em; z-index:60; background-color:red"></div>
+
+
+    <p id="elev" class="screen_text" hidden></p>
+
+    <div id="icons">
+      <button id="menu_btn" hidden><i class="fa fa-bars fa-2x"></i></button>
+    </div>
+
+    <div id="menu">
+      <div id="menuheader" class="window-header">Choose a topic</div>
+      <div id="menubody">
+        <table id="menu_list"></table>
+      </div>
+      <div id="menufooter" class="window-footer">
+        <button id="back_btn" class="btn" hidden>Back</button>
+        <button id="settings_btn"><i class="fa fa-cog fa-2x"></i></button>
+        <button id="screenshot_btn"><i class="fa fa-camera fa-2x"></i></button>
+        <button id="hide_btn" class="btn">Hide</button>
+      </div>
+    </div>
+
+
+    <div id="layer_header">
+      <p id="layer_title" class="layer_header_text screen_text"></p>
+      <p id="layer_credit" class="layer_header_text screen_text"></p>
+    </div>
+
+    <div id="scaleline"></div>
+
+    <div id="info">
+      <a id="info_link" target="_blank" href="http://app.earth-observer.org/data/basemaps/gmrt/basemap.html"><i class="fa fa-info-circle menu_info"></i></a>
+      <span id="ldeo_label" class="screen_text">&nbsp;LDEO - Columbia University</span>
+    </div>
+
+    <div id="opacity" hidden>      
+      <input id="opacity_slider" type="range" min="0" max="1" step="0.1" value="1">
+    </div>
+
+    <div id="sequence" hidden>
+      <i id="sequence_left" class="fa fa-chevron-circle-left fa-2x disabled"></i>
+      <i id="sequence_right" class="fa fa-chevron-circle-right fa-2x"></i>
+      <p id="sequence_level"></p>
+    </div>
+
+    <div id="popup" hidden>
+      <div id="popupheader" class="window-header"></div>
+      <div id="popupbody">
+        <p id="popup_text"></p>
+      </div>
+      <div id="popupfooter" class="window-footer">
+        <button id="close_btn" class="popup_btn">Close</button>
+        <button id="audio_btn" class="audio_btn">Audio</button>
+        <button id="silent_btn" class="silent_btn">Silent</button>
+        <audio id="popup_audio" type="audio/mpeg">Your browser does not support audio.</audio>
+      </div>
+    </div>
+
+    <div id="settings" hidden>
+      <div id="settingsheader" class="window-header">Settings</div>
+      <div id="settingsbody">
+        <table class="settings-table">
+          <tr>
+            <td>Scale Bar:</td>
+            <td align="center">
+              <label class="switch">
+                <input id="scalebar_switch" type="checkbox" checked>
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Legend:</td>
+            <td align="center">
+              <label class="switch">
+                <input id="legend_switch" type="checkbox" checked>
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Place Names:</td>
+            <td align="center">
+              <label class="switch">
+                <input id="place_names_switch" type="checkbox" checked>
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Location:</td>
+            <td align="center">
+              <label class="switch">
+                <input id="location_switch" type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>Show RGB:</td>
+            <td align="center">
+              <label class="switch">
+                <input id="rgb_switch" type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p id="settings_msgs"></p>
+      <div id="settingsfooter" class="window-footer">
+        <button id="close_settings_btn" class="popup_btn">Close</button>
+      </div>
+    </div>
+
+    <div id="legend" hidden>
+      <div id="legendheader">Legend</div>
+      <img id="legend_img">
+    </div>
+
+  </div>
+  <div id="table-popup" class="ol-popup">
+    <a href="#" id="table-popup-closer" class="ol-popup-closer"><i class="fa fa-times"></i></a>
+    <div id="table-popup-content"></div>
+  </div>
+
+</div>
+</body>
+</html>
