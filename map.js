@@ -254,7 +254,7 @@ function getParamFromUrl(url, param) {
   to it's child layers
 */
 function mergeObjects(obj1,obj2){
-    var obj3 = {};
+    var obj3 = {'parent_type': obj1.type};
     for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
     for (attrname in obj2) { obj3[attrname] = obj2[attrname]; }
     return obj3;
