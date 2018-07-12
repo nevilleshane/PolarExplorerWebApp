@@ -391,8 +391,7 @@ function menuItemClicked(overlay, parent, icon) {
   set to true, eg if the overlay.hideOpacitySlider has been set to true, or if 
   this is a multi_layer overlay 
 */
-function removeAllLayers(removeGMRT = false) {
-  console.log(removeGMRT);     
+function removeAllLayers(removeGMRT = false) {    
   map.setLayerGroup(new ol.layer.Group());
   if (!removeGMRT) map.addLayer(gmrtLayer);
   if (showSeabedNames) map.addLayer(placeNamesLayer);
@@ -539,6 +538,13 @@ function setSlider(layer, overlay) {
   //only want to change opacity of top layer, so need to unbind previous layers
   $("#opacity_slider").unbind(); 
   $("#opacity_slider").on("input", function(e) {
+    //for sequence layers, set opacity to 0 for all but the top layer
+    map.getLayers().forEach(function (l) {
+      if (l.get("title") === "Sequence" && l != layer) {
+          l.setOpacity(0);
+      }
+    });
+
     layer.setOpacity($(e.target).val());
   });
 
@@ -555,8 +561,9 @@ function displayLayer(layer, overlay, removeOldLayers) {
   
   //remove old layers if not a multilayer layer
   //only remove GMRT base layer is the hideOpacitySlider parameter is true
-  //or if the overlay type is multi_layer
-  if (removeOldLayers) removeAllLayers(overlay.hideOpacitySlider || overlay.parent_type == "multi_layer");
+  //or if the parent overlay type is multi_layer
+  var removeGMRT = overlay.hideOpacitySlider || overlay.parent_type == "multi_layer";
+  if (removeOldLayers) removeAllLayers(removeGMRT);
   
   //switch projection if necessary
   if (!overlay.mapProjection) {

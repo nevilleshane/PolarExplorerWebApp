@@ -292,7 +292,7 @@ function displayOverlaySequence(overlay, removeOldLayers) {
       else
         $("#sequence_right").removeClass("disabled");
       $("#sequence").show();
-      displaySequenceLayer(sequences[0], type, removeOldLayers);
+      displaySequenceLayer(sequences[0], type, true);
     }
   });
 
@@ -303,7 +303,7 @@ function displayOverlaySequence(overlay, removeOldLayers) {
     $("#sequence_level").text(sequences[seq_num].label);
     $("#sequence_right").removeClass("disabled");
     if (seq_num === 0) $("#sequence_left").addClass("disabled");
-    displaySequenceLayer(sequences[seq_num], type, removeOldLayers); 
+    displaySequenceLayer(sequences[seq_num], type, false); 
   });
 
   $("#sequence_right").unbind('click').click(function() {
@@ -312,7 +312,7 @@ function displayOverlaySequence(overlay, removeOldLayers) {
     $("#sequence_level").text(sequences[seq_num].label);
     $("#sequence_left").removeClass("disabled");
     if (seq_num === sequences.length - 1) $("#sequence_right").addClass("disabled");
-    displaySequenceLayer(sequences[seq_num], type, removeOldLayers);
+    displaySequenceLayer(sequences[seq_num], type, false);
   });
 
   /*
