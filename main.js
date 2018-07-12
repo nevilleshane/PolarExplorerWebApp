@@ -362,6 +362,9 @@ function menuItemClicked(overlay, parent, icon) {
     case "arcgis_tile_256":
       displayArcGIS(overlay, true);
       break;
+    case "arcgis_image":
+      displayArcGISImage(overlay, true);
+      break;
     case "xb_map":
       displayXBMap(overlay, true);
       break;

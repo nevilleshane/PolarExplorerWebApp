@@ -321,7 +321,7 @@ function displayOverlaySequence(overlay, removeOldLayers) {
   function displaySequenceLayer(layer, type, removeOldLayers) {
     var sequence = true;
     //remove any existing sequence layers
-    removeLayerByName("Sequence");
+    //removeLayerByName("Sequence");
     switch(type) {
       case "arcgis_tile_256":
         displayArcGIS(layer, removeOldLayers, sequence);
@@ -355,20 +355,66 @@ function displayOverlaySequence(overlay, removeOldLayers) {
 */
 function displayNOAA(overlay, removeOldLayers, sequence) {
   console.log(overlay);
-  //until I can sort out CORS for nnvl.noaa
-  var crossOrigin = overlay.source.indexOf("nnvl.noaa") > -1 ? null : "anonymous";
 
-  var noaaLayer = new ol.layer.Tile({
-    source: new ol.source.TileImage({
-      url: overlay.source.replace("http:", "https:") + "{z}/{x}/{y}.png",
-      projection: "EPSG:4326",
-      crossOrigin: crossOrigin,
-      wrapX: true
-    }),
-    title: sequence ? "Sequence" : ""
-  });
-  displayLayer(noaaLayer, overlay, removeOldLayers);
+  //since we can't access the requestSourcePath directly to get the latest source path
+  //due to Cross Origin restraints, a python script is run daily using cron that will
+  //fetch those paths and save them in the noaaSourcePaths.json file. 
+  if (overlay.requestSourcePath && overlay.source) {
+
+    //First need to work out the product name to get the latest source path.
+    var split = overlay.source.split("/");
+    imageName = split[6];
+    parts = imageName.split(".");
+    product = parts[0] + "." + parts[1]
+
+    $.ajax({
+      url: "noaaSourcePaths.json",
+      dataType: "json",
+    }).done(function(data) { 
+        tileUrl = data[product];
+        getLayer(tileUrl);
+    }).fail(function(err) {
+      console.log("ERROR");
+      console.log(err);
+    });
+  }
+
+  //for sequences, use the source path sent to the function
+  if (overlay.sequenceSource) {
+    getLayer(overlay.source);
+  }
+
+  function getUrlAndImageName(tileUrl) {
+    var split = tileUrl.split("/");
+    var imageName = split[6];
+    var split2 = imageName.split(".");
+    var productName = split2[0] + "_" + split2[1]
+    // for, e.g. salinity layer:
+    if (split2[3] != "color") {
+      productName += "_" + split2[3] + "m";
+    }
+    url = "https://gis.nnvl.noaa.gov/arcgis/rest/services/" + split[5] + "/" + productName + "/ImageServer/";
+    return {url: url, imageName: imageName};
+  }
+  
+  function getLayer(tileUrl) {
+    var urlAndImageName = getUrlAndImageName(tileUrl);
+    console.log(urlAndImageName);
+    var arcgisLayer = new ol.layer.Tile({
+      source: new ol.source.TileArcGISRest({
+        url: urlAndImageName.url,
+        crossOrigin: "anonymous",
+        wrapX: true,
+        params: {
+          mosaicRule: "{where:\"name = '" + urlAndImageName.imageName + "'\"}"
+        }
+      }),
+      title: sequence ? "Sequence" : ""
+    })
+    displayLayer(arcgisLayer, overlay, removeOldLayers);
+  }
 }
+
 
 /*
   display ArcGIS layer
@@ -397,6 +443,7 @@ function displayArcGIS(overlay, removeOldLayers, sequence) {
   }
   displayLayer(arcgisLayer, overlay, removeOldLayers);
 }
+
 
 /*
   display xb_map (local polar projected layers)
