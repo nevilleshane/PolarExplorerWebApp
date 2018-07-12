@@ -693,7 +693,7 @@ function displayTable(overlay, removeOldLayers) {
 
   // set the style function for the plotted points
   var styleFunction = function(feature) {
-    var rgb = [125,125,125];
+    var rgb = [0,0,0];
     if (colorColString && feature.get(colorColString)) {
       rgb = feature.get(colorColString).split('|');
     }

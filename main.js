@@ -387,11 +387,12 @@ function menuItemClicked(overlay, parent, icon) {
 
 /*
   Remove all layers except the GMRT base and perform any other tidying up 
-  before switching to new overlay 
+  before switching to new overlay.  Only remove GMRT base layer if removeGMRT is
+  set to true, eg if the overlay.hideOpacitySlider has been set to true. 
 */
-function removeAllLayers() {     
+function removeAllLayers(removeGMRT = false) {     
   map.setLayerGroup(new ol.layer.Group());
-  map.addLayer(gmrtLayer);
+  if (!removeGMRT) map.addLayer(gmrtLayer);
   if (showSeabedNames) map.addLayer(placeNamesLayer);
   $("#sequence").hide(); 
   $("#legend").hide();
@@ -551,7 +552,8 @@ function displayLayer(layer, overlay, removeOldLayers) {
   showSeabedNames = overlay.showSeabedNames;
   
   //remove old layers if not a multilayer layer
-  if (removeOldLayers) removeAllLayers();
+  //only remove GMRT base layer is the hideOpacitySlider parameter is true
+  if (removeOldLayers) removeAllLayers(overlay.hideOpacitySlider);
   
   //switch projection if necessary
   if (!overlay.mapProjection) {
