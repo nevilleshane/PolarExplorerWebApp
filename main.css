@@ -26,20 +26,6 @@ html, body {
   cursor: default;
 }
 
-#feedback {
-  background: #fff;
-  color: #444;
-  position: absolute;
-  font-family: arial;
-  height: 10.5em;
-  left: 1em;
-  margin: 0;
-  margin-top: 6em;
-  padding: 0.5em;
-  width: 8em;
-  z-index: 40;
-}
-
 #layerList {
   padding: 0.5em;
 }

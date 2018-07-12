@@ -765,10 +765,10 @@ function displayPlaceNameFeatures() {
           width: 1.25
         }),
         text: new ol.style.Text({
-          font: this.fontSize + 'px' + this.fontName,
+          font: this.fontSize + 'px ' + this.fontName,
           fill: new ol.style.Fill({ color: this.fontColor }),
           stroke: new ol.style.Stroke({
-            color: "#000", width: 2
+            color: "#000", width: 1.5
           }),
           // get the text from the feature - `this` is ol.Feature
           // and show only under certain resolution
