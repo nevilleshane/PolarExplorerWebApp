@@ -471,8 +471,12 @@ function displayXBMap(overlay, removeOldLayers, sequence) {
     tileSize: [320,320]
   });
 
-
-  var xbMapUrlTemplate = overlay.source + '/i_{res}/{name}.png'; 
+  var source_url = overlay.source.replace("www.earth-observer", "app.earth-observer");
+  //make sure there is not a / and the end of the source URL
+  if (source_url.slice(-1) == "/") {
+    source_url = source_url.slice(0, -1);
+  }
+  var xbMapUrlTemplate =  source_url + '/i_{res}/{name}.png'; 
   xbMapLayer = new ol.layer.Tile({
     source: new ol.source.XYZ({
       projection: map.getView().getProjection(),
