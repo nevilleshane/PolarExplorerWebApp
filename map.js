@@ -1,44 +1,20 @@
-function MapClient(view) { 
+function MapClient(view, params) { 
   //global URLs
   gmrtUrl = "https://www.gmrt.org:443/services/PointServer";
   gmrtMapUrl = "https://www.gmrt.org/services/mapserver/";
   placeNamesUrl = "http://app.earth-observer.org/data/overlays/WorldWFS";
 
-  //set up projections
-  //SP
-  proj4.defs('EPSG:3031', '+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs');
-  //NP
-  proj4.defs('EPSG:32661', '+proj=stere +lat_0=90 +lat_ts=90 +lon_0=0 +k=0.994 +x_0=2000000 +y_0=2000000 +ellps=WGS84 +datum=WGS84 +units=m +no_defs');
-  proj4.defs('EPSG:3995', '+proj=stere +lat_0=90 +lat_ts=90 +lon_0=0 +k=0.994 +x_0=2000000 +y_0=2000000 +ellps=WGS84 +datum=WGS84 +units=m +no_defs');
-
-  sp_proj = ol.proj.get('EPSG:3031');
-  sp_proj.setWorldExtent([-180.0000, -90.0000, 180.0000, -60.0000]);
-  sp_proj.setExtent([-8200000, -8200000, 8200000, 8200000]);
-  np_proj = ol.proj.get('EPSG:3995');
-  np_proj.setWorldExtent([-180.0000, 60.0000, 180.0000, 90.0000]);
-  np_proj.setExtent([-8200000, -8200000, 8200000, 8200000]);
-  merc_proj = ol.proj.get('EPSG:3857');
-
-  //parameters for different GMRT projections
-  gmrt_params = {
-    "merc": {"url_ext": "wms_merc?", "projection": merc_proj, "layer": "topo", "zoom": 2},
-    "sp": {"url_ext": "wms_SP?", "projection": sp_proj, "layer": "GMRT_SP", "zoom": 2},
-    "np": {"url_ext": "wms_NP?", "projection": np_proj, "layer": "GMRT_NP", "zoom": 2},
-  };
-
   //set up the map
   var map = new ol.Map({target: view});
   this.map = map;
-
-  //set initial parameters to Mercator projection
-  var params = gmrt_params.merc;
 
   //set the map view
   map.setView(new ol.View({
     center: [0, 0],
     zoom: params.zoom,
-    minZoom: 1,
-    projection: params.projection
+    minZoom: 2,
+    projection: params.projection,
+    extent: params.view_extent
   }));
 
   //load up the GMRT base layer
@@ -64,12 +40,39 @@ function MapClient(view) {
 }
 
 $(document).ready(function() {
-  //initialize the main map
-  map = new MapClient('map');
-  
+  //set up projections
+  //SP
+  proj4.defs('EPSG:3031', '+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs');
+  //NP
+  proj4.defs('EPSG:32661', '+proj=stere +lat_0=90 +lat_ts=90 +lon_0=0 +k=0.994 +x_0=2000000 +y_0=2000000 +ellps=WGS84 +datum=WGS84 +units=m +no_defs');
+  proj4.defs('EPSG:3995', '+proj=stere +lat_0=90 +lat_ts=90 +lon_0=0 +k=0.994 +x_0=2000000 +y_0=2000000 +ellps=WGS84 +datum=WGS84 +units=m +no_defs');
+
+  sp_proj = ol.proj.get('EPSG:3031');
+  sp_proj.setWorldExtent([-180.0000, -90.0000, 180.0000, -60.0000]);
+  sp_proj.setExtent([-8200000, -8200000, 8200000, 8200000]);
+  np_proj = ol.proj.get('EPSG:3995');
+  np_proj.setWorldExtent([-180.0000, 60.0000, 180.0000, 90.0000]);
+  np_proj.setExtent([-8200000, -8200000, 8200000, 8200000]);
+  merc_proj = ol.proj.get('EPSG:3857');
+  //view extents used to stop map from panning off of screen
+  merc_view_extent = [-Number.MAX_VALUE, -20037508.342789244, Number.MAX_VALUE, 20037508.342789244];
+  //try and make wide enough the we don't get flicker if viewed in full screen 
+  np_view_extent = [-20000000, -8200000, 20000000, 8200000];
+  sp_view_extent = [-20000000, -8200000, 20000000, 8200000];
+  //parameters for different GMRT projections
+  gmrt_params = {
+    "merc": {"url_ext": "wms_merc?", "projection": merc_proj, "layer": "topo", "zoom": 2, "view_extent": merc_view_extent},
+    "sp": {"url_ext": "wms_SP?", "projection": sp_proj, "layer": "GMRT_SP", "zoom": 2, "view_extent": sp_view_extent},
+    "np": {"url_ext": "wms_NP?", "projection": np_proj, "layer": "GMRT_NP", "zoom": 2, "view_extent": np_view_extent}
+  };
+
+  //initialize the main map in Mercator projection
+  params = gmrt_params.merc;
+  map = new MapClient('map', params);
+
   //add a hidden map that only contains the top layer
   //this is what will be queried when clicking on the map
-  map2 = new MapClient('hidden_map');
+  map2 = new MapClient('hidden_map', params);
 
   /*
     handle the start of a map move/zoom
@@ -84,12 +87,17 @@ $(document).ready(function() {
     handle the end of a map move/zoom
   */
   map.on('moveend', function(evt) {
+    //reset the view center point
+    constrainPan();
     //make sure hidden map stays aligned with visible map
     map2.getView().setZoom(map.getView().getZoom());
     map2.getView().setCenter(map.getView().getCenter());
     $("#hidden_map").show();
     //console.log("zoom level: " + map.getView().getZoom() + "("+Math.pow(2,map.getView().getZoom()-1)+") " + map.getView().getResolution());
   });
+
+  view = map.getView();
+  view.on('change:center', constrainPan);
 
   /*
     Use the mouse position to display lat/lon
@@ -140,6 +148,33 @@ $(document).ready(function() {
   });
 });
 
+/*
+  This constrains the map to within the view by adjusting the center after a pan or zoom
+*/
+var constrainPan = function() {
+    var extent = params.view_extent;
+    var visible = view.calculateExtent(map.getSize());
+    var centre = view.getCenter();
+    var delta;
+    var adjust = false;
+    if ((delta = extent[0] - visible[0]) > 0) {
+        adjust = true;
+        centre[0] += delta;
+    } else if ((delta = extent[2] - visible[2]) < 0) {
+        adjust = true;
+        centre[0] += delta;
+    }
+    if ((delta = extent[1] - visible[1]) > 0) {
+        adjust = true;
+        centre[1] += delta;
+    } else if ((delta = extent[3] - visible[3]) < 0) {
+        adjust = true;
+        centre[1] += delta;
+    }
+    if (adjust) {
+        view.setCenter(centre);
+    }
+};
 
 /*
   Display a tile_512 (local) layer
@@ -524,7 +559,6 @@ function displayXBMap(overlay, removeOldLayers, sequence) {
   switch to a different projection
 */
 function switchProjection(proj) {
-  var params;
   switch(proj) {
     case 0:
       params = gmrt_params.merc;
@@ -539,13 +573,15 @@ function switchProjection(proj) {
   map.getView().setZoom(params.zoom);
   if (map.getView().getProjection() == params.projection) return;
   map.removeLayer(gmrtLayer);
-  console.log(params);
-  map.setView(new ol.View({
+
+  view = new ol.View({
     center: [0, 0],
     zoom: params.zoom,
-    minZoom: 1,
-    projection: params.projection
-  }));
+    minZoom: 2,
+    projection: params.projection,
+    extent: params.view_extent
+  })
+  map.setView(view);
 
   gmrtLayer = new ol.layer.Tile({
     type: 'base',
@@ -560,8 +596,10 @@ function switchProjection(proj) {
   map.addLayer(gmrtLayer);
 
   //update projection of hidden map too
-  map2.setView(map.getView());
-
+  map2.setView(view);
+ 
+  //set listener of center change (ie panning)
+  view.on('change:center', constrainPan);
 }
 
 /*
