@@ -107,6 +107,8 @@ tr {
   z-index: 62;
   overflow: hidden;  
   resize: both;
+  min-height:22em;
+  min-width:22em;
 }
 
 #popup_text {
@@ -117,7 +119,6 @@ tr {
   padding: 10px;
 
 }
-
 
 #settings {
   background: #bfbfbf;

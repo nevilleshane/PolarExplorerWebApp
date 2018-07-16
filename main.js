@@ -274,10 +274,10 @@ function populateMenu(overlays) {
   var menu = $("#menu_list");
   //clear the menu
   menu.empty();
-  //don't show back button if no parents in list
-  if (parents.length === 0) {
-    $("#back_btn").hide();
-  }
+  //disable back button if no parents in list
+  $("#back_btn").prop("disabled", parents.length === 0);
+
+
 
   //add menu items for each child overlay
   $.each(overlays, function(i) {
