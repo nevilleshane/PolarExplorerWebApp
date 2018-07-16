@@ -1,9 +1,29 @@
+"""
+Author: Neville Shane
+Institution: LDEO, Columbia University
+Email: nshane@ldeo.columbia.edu
+
+Extract all the requestSourcePath URLs from the mapOverlays.json file, 
+attempt to access them and write the returned Tile_Directory_URL to 
+noaaSourcePaths.json file.
+For use with NOAA layers that display most recent week/year, etc.
+
+Usage:
+python getLatestNOAAImages.py <root_dir>
+
+Inputs:
+	root_dir: the root directory where the mapOverlays.json file can be found,
+			  and where the output file, noaaSourcePaths.json, will be written 
+"""
+
 import requests
 import json
+import sys, os
 
-json_file = "mapOverlays.json"
+root_dir = sys.argv[1]
+json_file = os.path.join(root_dir, "mapOverlays.json")
 out = {}
-output_file = "noaaSourcePaths.json"
+output_file = os.path.join(root_dir, "noaaSourcePaths.json")
 
 #read the the json file to find any Request Source Path urls
 with open(json_file) as f:
