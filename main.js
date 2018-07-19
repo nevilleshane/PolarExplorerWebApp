@@ -563,6 +563,8 @@ function displayLayer(layer, overlay, removeOldLayers) {
   //only remove GMRT base layer is the hideOpacitySlider parameter is true
   //or if the parent overlay type is multi_layer
   var removeGMRT = overlay.hideOpacitySlider || overlay.parent_type == "multi_layer";
+  //don't remove base layer of multilayer with overlay sequence
+  if (overlay.parent_type == "multi_layer" && overlay.type == "overlay_sequence") removeOldLayers = false;
   if (removeOldLayers) removeAllLayers(removeGMRT);
   
   //switch projection if necessary
