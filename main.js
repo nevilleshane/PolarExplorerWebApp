@@ -161,7 +161,7 @@ $(document).ready(function() {
       }, {"hitTolerance":7});
     if (feature) {
         //ignore placename label features
-        if (typeof feature.fontName != "undefined") return 
+        if (typeof feature.fontName != "undefined") return; 
 
         var geometry = feature.getGeometry();
         var feature_coord = geometry.getCoordinates();

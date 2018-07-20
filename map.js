@@ -56,9 +56,8 @@ $(document).ready(function() {
   merc_proj = ol.proj.get('EPSG:3857');
   //view extents used to stop map from panning off of screen
   merc_view_extent = [-Number.MAX_VALUE, -20037508.342789244, Number.MAX_VALUE, 20037508.342789244];
-  //try and make wide enough the we don't get flicker if viewed in full screen 
-  np_view_extent = [-20000000, -8200000, 20000000, 8200000];
-  sp_view_extent = [-20000000, -8200000, 20000000, 8200000];
+  np_view_extent = [-8200000, -8200000, 8200000, 8200000];
+  sp_view_extent = [-8200000, -8200000, 8200000, 8200000];
   //parameters for different GMRT projections
   gmrt_params = {
     "merc": {"url_ext": "wms_merc?", "projection": merc_proj, "layer": "topo", "zoom": 2, "view_extent": merc_view_extent},
@@ -153,26 +152,45 @@ $(document).ready(function() {
 */
 var constrainPan = function() {
     var extent = params.view_extent;
+    var extentHeight = extent[3] - extent[1];
+    var extentWidth = extent[2] - extent[0];
     var visible = view.calculateExtent(map.getSize());
+    var visibleHeight = visible[3] - visible[1];
+    var visibleWidth = visible[2] - visible[0];
     var centre = view.getCenter();
     var delta;
     var adjust = false;
-    if ((delta = extent[0] - visible[0]) > 0) {
-        adjust = true;
-        centre[0] += delta;
-    } else if ((delta = extent[2] - visible[2]) < 0) {
-        adjust = true;
-        centre[0] += delta;
+    if (visibleHeight > extentHeight) {
+      // if the view is taller than the map extent (eg in full screen mode), fix the
+      // vertical centre of the map to be 0 so it can't be moved up or down.
+      adjust = true;
+      centre[1] = 0;
+    } else {
+      if ((delta = extent[1] - visible[1]) > 0) {
+          adjust = true;
+          centre[1] += delta;
+      } else if ((delta = extent[3] - visible[3]) < 0) {
+          adjust = true;
+          centre[1] += delta;
+      }
     }
-    if ((delta = extent[1] - visible[1]) > 0) {
-        adjust = true;
-        centre[1] += delta;
-    } else if ((delta = extent[3] - visible[3]) < 0) {
-        adjust = true;
-        centre[1] += delta;
+    if (visibleWidth > extentWidth) {
+      // if the view is wider than the map extent (eg polar projection), fix the
+      // horizontal centre of the map to be 0 so it can't be moved left or right.
+      adjust = true;
+      centre[0] = 0;
+    } else {
+      if ((delta = extent[0] - visible[0]) > 0) {
+          adjust = true;
+          centre[0] += delta;
+      } else if ((delta = extent[2] - visible[2]) < 0) {
+          adjust = true;
+          centre[0] += delta;
+      }
     }
     if (adjust) {
         view.setCenter(centre);
+        map.updateSize();
     }
 };
 
@@ -205,7 +223,7 @@ function displayTile512(overlay, removeOldLayers, sequence) {
         .replace('{x}', tileCoord[1].toString())
         .replace(/{y}/g, (Math.pow(2, new_z)/delta + tileCoord[2]).toString());
     return url;
-  };
+  }
 
   var urlTemplate = overlay.source + '/{z}/{y}/{y}_{x}.png' ; 
   var eoLayer = new ol.layer.Tile({
@@ -400,7 +418,7 @@ function displayNOAA(overlay, removeOldLayers, sequence) {
     var split = overlay.source.split("/");
     imageName = split[6];
     parts = imageName.split(".");
-    product = parts[0] + "." + parts[1]
+    product = parts[0] + "." + parts[1];
 
     $.ajax({
       url: "noaaSourcePaths.json",
@@ -423,7 +441,7 @@ function displayNOAA(overlay, removeOldLayers, sequence) {
     var split = tileUrl.split("/");
     var imageName = split[6];
     var split2 = imageName.split(".");
-    var productName = split2[0] + "_" + split2[1]
+    var productName = split2[0] + "_" + split2[1];
     // for, e.g. salinity layer:
     if (split2[3] != "color") {
       productName += "_" + split2[3] + "m";
@@ -445,7 +463,7 @@ function displayNOAA(overlay, removeOldLayers, sequence) {
         }
       }),
       title: sequence ? "Sequence" : ""
-    })
+    });
     displayLayer(arcgisLayer, overlay, removeOldLayers);
   }
 }
@@ -580,7 +598,7 @@ function switchProjection(proj) {
     minZoom: 2,
     projection: params.projection,
     extent: params.view_extent
-  })
+  });
   map.setView(view);
 
   gmrtLayer = new ol.layer.Tile({
@@ -833,7 +851,7 @@ function displayPlaceNameFeatures() {
   ajax processes can overwhelm the network.  Use the `if (...) continue` lines to filter the feature sets.
 */
 function displayPlaceNames() {
-  var url_template = "http://app.earth-observer.org/data/overlays/WorldWFS/PlaceNames/{type}/{y}/{y}_{x}.xml.gz"
+  var url_template = "http://app.earth-observer.org/data/overlays/WorldWFS/PlaceNames/{type}/{y}/{y}_{x}.xml.gz";
   formatWFS = new ol.format.WFS({gmlFormat: new ol.format.GML2()});
   var writer = new ol.format.GeoJSON();
   var allFeatures = [];
@@ -841,7 +859,7 @@ function displayPlaceNames() {
   sourceVector = new ol.source.Vector({
     loader: function() {
       for (var j in Object.keys(placeNames)) {
-        var deltas = Object.keys(placeNames)[j]
+        var deltas = Object.keys(placeNames)[j];
         var thisSet = placeNames[deltas];
         var deltaY = parseInt(deltas.split(",")[0]);
         var deltaX = parseInt(deltas.split(",")[1]);
@@ -903,7 +921,7 @@ function displayPlaceNames() {
                       fontColor: this.fontColor,
                       fontSize: this.fontSize,
                       fontName: this.fontName
-                    }
+                    };
                     allFeatures.push(record);
                   }
                   sourceVector.addFeatures(features);
@@ -942,7 +960,7 @@ function displayPlaceNames() {
         
   setTimeout (function() {
     console.log(JSON.stringify(allFeatures));
-  },20000)                
+  },20000);                
 
   var placeNamesLayer = new ol.layer.Vector({
     source: sourceVector
