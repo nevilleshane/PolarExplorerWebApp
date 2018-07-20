@@ -118,35 +118,6 @@ $(document).ready(function() {
   displayPlaceNameFeatures();
 
   /*
-    Elements that make up the popup.
-  */
-  container = document.getElementById('table-popup');
-  content_element = document.getElementById('table-popup-content');
-  closer = document.getElementById('table-popup-closer');
-
-  /*
-    Create an overlay to anchor the popup to the map.
-  */
-  var table_popup_overlay = new ol.Overlay({
-    element: container,
-    autoPan: true,
-    autoPanAnimation: {
-      duration: 250
-    }
-  });
-
-  map.addOverlay(table_popup_overlay);
-
-  /*
-   Add a click handler to hide the popup.
-  */
-  closer.onclick = function() {
-    table_popup_overlay.setPosition(undefined);
-    closer.blur();
-    return false;
-  };
-
-  /*
     Handle what happens if the user clicks on the map
   */
   map.on('click', function(evt) {
@@ -166,8 +137,6 @@ $(document).ready(function() {
         var geometry = feature.getGeometry();
         var feature_coord = geometry.getCoordinates();
         var content="";
-
-        console.log(tablePopupObj);
         var url;
         if (tablePopupObj.base_url && tablePopupObj.url_property) {
           url = tablePopupObj.base_url + feature.get(tablePopupObj.url_property);
@@ -219,6 +188,9 @@ $(document).ready(function() {
 
       var coord = map.getCoordinateFromPixel([x,y]);
       var ll = ol.proj.toLonLat(coord, map.getView().getProjection());
+      //check that we are not out of the map view extent
+      if (coord[0] > params.view_extent[2] || coord[0] < params.view_extent[0]) return;
+      if (coord[1] > params.view_extent[3] || coord[1] < params.view_extent[1]) return;
       $.ajax({
         type:"GET",
         url:gmrtUrl,

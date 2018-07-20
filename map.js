@@ -73,6 +73,37 @@ $(document).ready(function() {
   //this is what will be queried when clicking on the map
   map2 = new MapClient('hidden_map', params);
 
+
+  /*
+    Elements that make up the popup.
+  */
+  container = document.getElementById('table-popup');
+  content_element = document.getElementById('table-popup-content');
+  closer = document.getElementById('table-popup-closer');
+
+  /*
+    Create an overlay to anchor the popup to the map.
+  */
+  table_popup_overlay = new ol.Overlay({
+    title: "tablePopupOverlay",
+    element: container,
+    autoPan: true,
+    autoPanAnimation: {
+      duration: 250
+    }
+  });
+
+  map.addOverlay(table_popup_overlay);
+
+  /*
+   Add a click handler to hide the popup.
+  */
+  closer.onclick = function() {
+    table_popup_overlay.setPosition(undefined);
+    closer.blur();
+    return false;
+  };
+
   /*
     handle the start of a map move/zoom
   */
@@ -152,6 +183,8 @@ $(document).ready(function() {
 */
 var constrainPan = function() {
     var extent = params.view_extent;
+    // add an extra margin at the top if showing table popups so they don't get cut off
+    if (table_popup_overlay.getPosition()) return;
     var extentHeight = extent[3] - extent[1];
     var extentWidth = extent[2] - extent[0];
     var visible = view.calculateExtent(map.getSize());
