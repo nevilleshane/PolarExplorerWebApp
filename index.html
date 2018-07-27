@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Londrina Outline' rel='stylesheet'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <link rel="stylesheet" href="main.css" type="text/css">
   <link rel="shortcut icon" href="favicon.ico" />
   <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
@@ -21,7 +21,6 @@
   <script type="text/javascript" src="placeNameFeatures.json"></script>
   <script type="text/javascript" src="map.js"></script>
   <script type="text/javascript" src="main.js"></script>
-  <!-- <script type="text/javascript" src="jquery.ajax-cross-origin.min.js"></script> -->
 </head>
 
 <body>
@@ -46,10 +45,11 @@
         <table id="menu_list"></table>
       </div>
       <div id="menufooter" class="window-footer">
-        <button id="back_btn" class="btn" >Back</button>
-        <button id="settings_btn"><i class="fa fa-cog fa-2x"></i></button>
-        <button id="screenshot_btn"><i class="fa fa-camera fa-2x"></i></button>
-        <button id="hide_btn" class="btn">Hide</button>
+        <button title="Go back to previous menu" id="back_btn" class="btn" >Back</button>
+        <button title="Settings" id="settings_btn"><i class="fa fa-cog fa-2x"></i></button>
+        <button title="Take Screenshot" id="screenshot_btn"><i class="fa fa-camera fa-2x"></i></button>
+        <button title="Tutorial" id="tutorial_btn" onclick="window.open('tutorial.html')"><i class="fas fa-chalkboard-teacher fa-2x"></i></button>
+        <button title="Hide this window" id="hide_btn" class="btn">Hide</button>
       </div>
     </div>
 

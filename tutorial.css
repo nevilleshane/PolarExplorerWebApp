@@ -1,0 +1,29 @@
+/*html, body {
+  padding: 0 3em 1em 3em;
+}
+*/
+.lesson_div {
+	border-style: dotted;
+	border-width: 1px;
+	margin: 10px;
+	padding: 1em;
+
+}
+
+p, h1, h2 {
+	text-align: center;
+}
+
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.lesson_div td {
+	vertical-align: top;
+}
+
+td {
+	vertical-align: middle;
+}
