@@ -898,11 +898,14 @@ function displayPlaceNames() {
         var deltaX = parseInt(deltas.split(",")[1]);
         var maxY = 180/deltaY;
         var maxX = 360/deltaX;
-        if (deltaY != 5) continue;
+        if (deltaY != 10) continue;
         for (var k in thisSet) {
           var thisPNLayer = thisSet[k];
           if (thisPNLayer.type == "topp:countries") continue;
-          if (thisPNLayer.type != "10") continue;
+          // displayPNLayer(thisPNLayer, maxY);
+          // continue;
+          
+          // if (thisPNLayer.type != "10") continue;
           for (var y=0; y<maxY; y++){
             for (var x=0; x<maxX; x++){
 
@@ -1006,74 +1009,75 @@ function displayPlaceNames() {
   Experimental code used to try and display place names using vector tiles.
   Couldn't get it to work, but may return to it later.
 */
-function displayPNLayer (layer) {
+function displayPNLayer (layer, maxY) {
   formatWFS = new ol.format.WFS({gmlFormat: new ol.format.GML2()});
   var zoom = map.getView().getZoom();
   var minZoom = layer.minZoom ? parseInt(layer.minZoom) : 0;
   var maxZoom = layer.maxZoom ? parseInt(layer.maxZoom) : 999;
 
-  //remove pre-existing version of layer
-  // if (zoom < minZoom || zoom > maxZoom) {
-  //   //removeLayerByName(layer.type);
-  //   return;
-  // }
-  // sourceVector = new ol.source.Vector({
-  //   loader: function() {
+  //calculate the resolutions for each zoom level
+  var projExtent = map.getView().getProjection().getExtent();
+  var startResolution = ol.extent.getWidth(projExtent) / 320;
+  var resolutions = new Array(maxY);
+  for (var i = 0, ii = resolutions.length; i < ii; ++i) {
+    resolutions[i] = startResolution / Math.pow(2, i);
+  }
 
-  //     $.ajax({
-  //         url: 'http://app.earth-observer.org/data/overlays/WorldWFS/PlaceNames/topp:wpl_oceans/0/0_0.xml',
-  //         type: 'GET',
-  //         crossOrigin: true,
-  //     }).done(function(response) {
-  //         console.log(response);
-          
-  //         var features = formatWFS.readFeatures(response);
-  //         // lat and lon are the wrong way round in the WFS, so need to flip
-  //         for (var i in features) {
-  //           var feature = features[i];
-  //           var lat = feature.getGeometry().getCoordinates()[0];
-  //           var lon = feature.getGeometry().getCoordinates()[1];
-  //           // convert latlon to current projection
-  //           var newCoord = ol.proj.transform([lon, lat], 'EPSG:4326', map.getView().getProjection());
-  //           //feature.setGeometry(new ol.geom.Point([newCoord[0], newCoord[1]]));
-  //           feature.setStyle(textStyleFunction);
-  //         }
-  //         sourceVector.addFeatures(features);
-  //         console.log(sourceVector.getFeatures());
-  //     });
-  //   }
-  // });
+  //set up a tile grid
+  tileGrid = new ol.tilegrid.TileGrid({
+    // minZoom: minZoom,
+    // maxZoom: maxZoom,
+    extent: projExtent,
+    resolutions: resolutions,
+    tileSize: [320,320]
+  });
 
   sourceVectorTile = new ol.source.VectorTile({
     tileUrlFunction: tileUrlFunction,
     format: new ol.format.WFS(),
-    // minZoom: minZoom,
-    // maxZoom: maxZoom,
+    tileGrid: tileGrid,
     tileLoadFunction: function(tile, url) {
       tile.setLoader(function() {
         $.ajax({
             url: url,
             type: 'GET',
             crossOrigin: true,
-            //headers: { "Accept-Encoding" : "gzip, deflate" }
+            minZoom: minZoom,
+            maxZoom: maxZoom,
+            fontColor: layer.fontColor,
+            fontName: layer.fontName,
+            fontSize: layer.fontSize
         }).done(function(response) {
 //            console.log(response);
             var features = formatWFS.readFeatures(response);
+            console.log(url);
+            console.log(features);
             tile.projection_ = map.getView().getProjection();
             // lat and lon are the wrong way round in the WFS, so need to flip
             for (var i in features) {
               var feature = features[i];
+              var name = "";
+              if (feature.get("full_name_nd")) name = feature.get("full_name_nd");
+              if (feature.get("FullName")) name = feature.get("FullName");
               var lat = feature.getGeometry().getCoordinates()[0];
               var lon = feature.getGeometry().getCoordinates()[1];
               // convert latlon to current projection
               var newCoord = ol.proj.transform([lon, lat], 'EPSG:4326', map.getView().getProjection());
               feature.setGeometry(new ol.geom.Point([newCoord[0], newCoord[1]]));
+              feature.minZoom = this.minZoom;
+              feature.maxZoom = this.maxZoom;
+              feature.fontColor = decimalToRGB(this.fontColor);
+              feature.fontSize = this.fontSize;
+              feature.fontName = this.fontName;
+              feature.name = name;
               feature.setStyle(textStyleFunction);
+              // console.log("successfully loaded " + url);
             }
             tile.setFeatures(features);
-            //console.log(tile.getFeatures());
+            console.log(tile.getFeatures());
         }).fail(function(err) {
-          console.log(err.responseText);
+          // console.log(url);
+          // console.log(err.responseText);
         });
       });
     }
@@ -1088,7 +1092,33 @@ function displayPNLayer (layer) {
   console.log((zoom >= minZoom && zoom <= maxZoom));
 
 
+
   function textStyleFunction() {
+    return [
+      new ol.style.Style({
+          fill: new ol.style.Fill({
+          color: 'rgba(255,255,255,0.4)'
+        }),
+        stroke: new ol.style.Stroke({
+          color: '#3399CC',
+          width: 1.25
+        }),
+        text: new ol.style.Text({
+          font: this.fontSize + 'px ' + this.fontName,
+          fill: new ol.style.Fill({ color: this.fontColor }),
+          stroke: new ol.style.Stroke({
+            color: "#000", width: 1.5
+          }),
+          // get the text from the feature - `this` is ol.Feature
+          // and show only under certain resolution
+          //text: (Math.pow(2,map.getView().getZoom()-1) >= this.minZoom && Math.pow(2,map.getView().getZoom()-1) <= this.maxZoom) ? this.name : ""
+          text: this.name
+        })
+      })
+    ];
+  }
+
+  function textStyleFunctionOld() {
     return [
       new ol.style.Style({
           fill: new ol.style.Fill({
@@ -1113,9 +1143,6 @@ function displayPNLayer (layer) {
     ];
   }
 
-  // var layerVector = new ol.layer.Vector({
-  //   source: sourceVector
-  // });
 
   var layerVectorTile = new ol.layer.VectorTile({
     title:layer.type,
@@ -1125,57 +1152,22 @@ function displayPNLayer (layer) {
   });
   map.addLayer(layerVectorTile);
 
-  // var accessToken =
-  //     "pk.eyJ1IjoiYWhvY2V2YXIiLCJhIjoiRk1kMWZaSSJ9.E5BkluenyWQMsBLsuByrmg";
-
-  // For how many zoom levels do we want to use the same vector tiles?
-  // 1 means "use tiles from all zoom levels". 2 means "use the same tiles for 2
-  // subsequent zoom levels".
-  var reuseZoomLevels = 2;
-
-  // Offset of loaded tiles from web mercator zoom level 0.
-  // 0 means "At map zoom level 0, use tiles from zoom level 0". 1 means "At map
-  // zoom level 0, use tiles from zoom level 1";.
-  var zoomOffset = -2;
-
-  // // Calculation of tile urls
-  // var resolutions = [];
-  // for (var z = zoomOffset / reuseZoomLevels; z <= 22 / reuseZoomLevels; ++z) {
-  //   resolutions.push(156543.03392804097 / Math.pow(2, z * reuseZoomLevels));
-  // }
 
   function tileUrlFunction(tileCoord) {
-    // var url =  ("http://{a-d}.tiles.mapbox.com/v4/mapbox.mapbox-streets-v6/" +
-    //     "{z}/{x}/{y}.vector.pbf?access_token=" + accessToken)
-    //     .replace("{z}", String(tileCoord[0] * reuseZoomLevels + zoomOffset))
-    //     .replace("{x}", String(tileCoord[1]))
-    //     .replace("{y}", String(-tileCoord[2] - 1))
-    //     .replace("{a-d}", "abcd".substr(
-    //         ((tileCoord[1] << tileCoord[0]) + tileCoord[2]) % 4, 1));
+
     var url = "http://app.earth-observer.org/data/overlays/WorldWFS/PlaceNames/{type}/{y}/{y}_{x}.xml.gz"
       .replace('{type}', layer.type)
       .replace('{x}', tileCoord[1].toString())
-      .replace(/{y}/g, (-tileCoord[2] - 1).toString());
-      // .replace('{z}', String(tileCoord[0] * reuseZoomLevels + zoomOffset))
-      // .replace('{x}', tileCoord[1].toString())
-      // .replace(/{y}/g, (-tileCoord[2] - 1).toString());
-    // var url = "http://app.earth-observer.org/data/overlays/WorldWFS/PlaceNames/{type}/{y}/{y}_{x}.xml.gz"
-    //         .replace('{type}', layer.type)
-    //         .replace("{z}", "0")
-    //         .replace(/{y}/g, "0")
-    //         .replace("{x}", "0");
-   // console.log(tileCoord);
-    //console.log(url);
+      .replace(/{y}/g, (maxY + tileCoord[2]).toString());
+
+    console.log(tileCoord);
+    // console.log(maxY);
+    console.log(url);
     return url;
   }
   var test = new ol.layer.VectorTile({
     source: new ol.source.VectorTile({
-
       format: formatWFS,
-      // tileGrid: new ol.tilegrid.TileGrid({
-      //   //extent: map.getView().getProjection().getExtent(),
-      //  // resolutions: resolutions
-      // }),
       tileUrlFunction: tileUrlFunction
     })
   });

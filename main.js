@@ -109,6 +109,7 @@ $(document).ready(function() {
   scaleUnits = "";
   tablePopupObj = {};
   showSeabedNames = true;
+  webpages_url = "http://app.earth-observer.org/data/web_pages/html/";
 
   // Populate the menu using the overlays in the mapOverlays.json file
   console.log(mapOverlays);
@@ -171,7 +172,6 @@ $(document).ready(function() {
         content_element.innerHTML = content;
         table_popup_overlay.setPosition(feature_coord);
         $("#table-popup").css("width", "max-content");
-        console.info(feature.getProperties());
 
     } else if (showRGB) {
       //Show ARGB value at pixel
@@ -266,7 +266,14 @@ function populateMenu(overlays) {
     if (overlay.info) {
       info_icon.addClass("fa fa-info-circle");
       info_link.append(info_icon);
-      info_link.attr("href", overlay.info);
+      //open overlay.info url as an iframe in info.html 
+      var info_url = overlay.info;
+      if (overlay.info.indexOf(webpages_url) != -1) {
+        var topic = info_url.split(webpages_url)[1].replace(".html", "");
+        info_link.attr("href", "info.html?topic=" + topic);
+      } else {
+        info_link.attr("href", info_url);
+      }
       info.append(info_link);
     }
     //if overlay is of type overview, set as menu header
@@ -477,7 +484,14 @@ function showCredit(credit) {
   set the link for the info button
 */
 function setInfoLink(url) {
-  $("#info_link").attr("href", url).show();
+  //open url as an iframe in info.html 
+  if (url.indexOf(webpages_url) != -1) {
+    var topic = url.split(webpages_url)[1].replace(".html", "");
+    $("#info_link").attr("href", "info.html?topic=" + topic);
+  } else {
+    $("#info_link").attr("href", url);
+  }
+  $("#info_link").show();
 }
 
 /*

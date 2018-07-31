@@ -3,8 +3,8 @@
 }
 */
 .lesson_div {
-	border-style: dotted;
-	border-width: 1px;
+	border-style: dashed;
+	border-width: 2px;
 	margin: 10px;
 	padding: 1em;
 
