@@ -11,7 +11,6 @@
 
   <link href='https://fonts.googleapis.com/css?family=Londrina Outline' rel='stylesheet'>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-  <link rel="stylesheet" href="tutorial.css" type="text/css">
   <link rel="shortcut icon" href="favicon.ico" />
   <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
@@ -28,25 +27,26 @@
       <tr>  
         <td>
           <a target="_blank" href="index.html" style="text-decoration: none;">
-            <img src="img/polar_explorer_logo.png" alt="logo">
+            <img src="img/polar_explorer_logo.png" style="width:120px;height:120px;" alt="logo">
           </a>
         </td>
         <td>
           <a target="_blank" href="index.html" style="text-decoration: none;">
-            <h1 class="w3-xxxlarge">Polar Explorer Web Application</h1>
+            <h1 class="w3-xxlarge">Polar Explorer Web Application</h1>
           </a>
         </td>
       </tr>
     </table>
   </header>
 
-  <div class="w3-container" style="padding:5px">
+  <div id="frameContainer" class="w3-container" style="padding:5px">
     <iframe id="iframe" frameborder="0" border="0" cellspacing="0" style="border-style: none; width: 100%; height: 100em;"></iframe>
   </div>
 </div>
 
 <script type="text/javascript">
   $(document).ready(function() {
+    console.log("14:40");
     var webpages_url = "http://app.earth-observer.org/data/web_pages/html/";
     var basemap_url = "http://app.earth-observer.org/data/basemaps/gmrt/";
 
@@ -59,7 +59,7 @@
       url = basemap_url + topic + ".html";
     } else if (topic) {
       url = webpages_url + topic + ".html";
-    } 
+    }
     $("#iframe").attr("src", url);
   });
 
@@ -67,6 +67,13 @@
     $(this).height($(this).contents().height());
     $(this).width($(this).contents().width());
   });
+
+ 
+  $(window).resize(function() {
+      $('#iframe').height($(this).height());
+      $('#iframe').width($(this).width());
+  }); 
+
 </script>
 
 </body>

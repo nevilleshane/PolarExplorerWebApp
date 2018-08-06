@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+  // alert('new4');
+
+  if (isMobile) {
+    // Start with the menu hidden in mobile mode
+    $("#menu").hide();
+    $("#menu_btn").show();
+  }
+
   /*
     Display the menu when the menu button is clicked
   */
@@ -21,6 +29,11 @@ $(document).ready(function() {
   */
   $("#close_btn").click(function() {
       $("#popup").hide();
+      if (isMobile) {
+        $("#menu").removeClass("disabled");
+        $("#menu").hide();
+        $("#menu_btn").show();
+      }
   });
 
   /*
@@ -150,7 +163,8 @@ $(document).ready(function() {
         }
 
         var image_url;
-        if (tablePopupObj.image_base_url && tablePopupObj.image_url_property) {
+        if (tablePopupObj.image_base_url && tablePopupObj.image_url_property && feature.get(tablePopupObj.image_url_property)) {
+          console.log(feature.get(tablePopupObj.image_url_property));
           image_url = tablePopupObj.image_base_url + feature.get(tablePopupObj.image_url_property);
         }
         else if (tablePopupObj.image_base_url && !tablePopupObj.image_url_property) {
@@ -159,7 +173,7 @@ $(document).ready(function() {
         else if (!tablePopupObj.image_base_url && tablePopupObj.image_url_property) {
           image_url = feature.get(tablePopupObj.image_url_property);
         }
-        if (image_url) content += "<a target='_blank' href='" + url + "'><img src='" + image_url +"'></img></a><br/>";
+        if (image_url) content += "<a target='_blank' href='" + url + "'><img style='width:150px;height:150px;' src='" + image_url +"'></img></a><br/>";
 
 
         for (var i in tablePopupObj.properties) {
@@ -278,7 +292,12 @@ function populateMenu(overlays) {
     }
     //if overlay is of type overview, set as menu header
     if (overlay.type == "overview") {
-      item = $("<th/>").text(overlay.name);
+      //item = $("<th/>").text(overlay.name);
+      item = $("<th/>");
+      var overview_topic = overlay.info.split(webpages_url)[1].replace(".html", "");
+      var overview_link = $("<a/>").attr("target", "_blank").attr("href", "info.html?topic=" + overview_topic).text(overlay.name);
+      overview_link.addClass("overview_link");
+      item.append(overview_link);
       row.addClass("menu_overview");
       more.append(icon);
     //add as menu item
@@ -445,6 +464,9 @@ function showPopup(overlay) {
         });
       }
       $("#popup").show();
+      if (isMobile) {
+        $("#menu").addClass("disabled");
+      }
     }
   });
 }

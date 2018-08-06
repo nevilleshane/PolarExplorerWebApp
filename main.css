@@ -56,8 +56,6 @@ html, body {
   width:95%;
   overflow: auto; 
 }
-
-
 table {
   width: 100%;
 }
@@ -117,7 +115,6 @@ tr {
   height: 75%;
   overflow: auto; 
   padding: 10px;
-
 }
 
 #settings {
@@ -166,13 +163,6 @@ tr {
     background-color: #071d3f;
     color: #fff;
     width: 90%;
-}
-
-#menubody {
-  position: absolute;
-  height: 75%;
-  width:95%;
-  overflow: auto; 
 }
 
 #info {
@@ -371,4 +361,87 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.overview_link {
+  color: blue;
+  text-decoration: none;
+}
+
+
+/*#menu.disabled {
+  color: #eeeeee;
+}
+
+#menu.disabled .window-header, .window-footer, table, .menu_overview, button {
+  background-color: #dddddd;
+  color: #eeeeee;
+}
+*/
+@media screen and (max-width: 481px){
+
+  .window-header {
+    width: 100%;
+  }
+
+  .window-footer {
+    width: 100%;
+  }
+
+  #menu {
+    bottom: 0;
+    height: 100%;
+    right: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  #menubody {
+    height: 75%;
+    width: 101%;
+  }
+
+
+  #popup {
+
+    height: 80%;
+/*    bottom: 0;
+    left: 0;*/
+    padding: 0.5em;
+    width: 80%;
+    margin: auto;
+    overflow: hidden;  
+    resize: both;
+    min-height: 0;
+    min-width: 0;
+    z-index: 70;
+  }
+
+  #info {
+    bottom: 0.3em;
+    left: 0.5em;
+  }
+
+  #icons {
+    right: 0.2em;
+    bottom: 0.4em;
+    position: absolute;
+  }
+
+  #scaleline {
+    top: 2.2em;
+    right: 30%;
+  }
+
+  .ol-control button {
+    font-size: 50%;
+    height: 1.1em;
+    width: 1.1em;
+  }
+
+  .ol-mouse-position {
+    left: 30%;
+    top: 0.6em;
+  }
+
 }
