@@ -46,7 +46,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    console.log("14:40");
+    console.log("11:07");
     var webpages_url = "http://app.earth-observer.org/data/web_pages/html/";
     var basemap_url = "http://app.earth-observer.org/data/basemaps/gmrt/";
 
@@ -66,10 +66,18 @@
   $('#iframe').load(function () {
     $(this).height($(this).contents().height());
     $(this).width($(this).contents().width());
+
+    //add our own css styling to the iframe contents
+    var cssLink = document.createElement("link");
+    cssLink.href = "info.css"; 
+    cssLink.rel = "stylesheet"; 
+    cssLink.type = "text/css"; 
+    $(this).contents().find("head").append(cssLink);
   });
 
  
   $(window).resize(function() {
+      //resize the iframe when the window is resized
       $('#iframe').height($(this).height());
       $('#iframe').width($(this).width());
   }); 
