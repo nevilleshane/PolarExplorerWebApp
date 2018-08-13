@@ -726,6 +726,7 @@ function displayTable(overlay, removeOldLayers) {
     crossOrigin: true,
     success: function(response) {
       var csvString = response;
+
       if (overlay.separator === "tsv") {
         //if tab-separated, convert to comma-separated (replace commas with pipes first)
         csvString = csvString.replace(/,/g, "|").replace(/\t/g, ",");
@@ -733,6 +734,16 @@ function displayTable(overlay, removeOldLayers) {
 
       // get symbol size and color column names
       var columns = csvString.split(/\r?\n|\r/)[0].split(',');
+      
+      //go through the columns and if they do not all have unique names, add a #repeated_key# extension
+      for (var i in columns) {
+        var col = columns[i];
+        if (columns.indexOf(col) != columns.lastIndexOf(col)) {
+          columns[i] = col + "#repeated_key#";
+          csvString = csvString.replace(col + ",", col + "#repeated_key#,");
+        }
+      }
+  
       if (sizeCol) sizeColString = columns[sizeCol];
       if (colorCol) colorColString = columns[colorCol];
       csv2geojson.csv2geojson(csvString, function(err, data) {
@@ -757,6 +768,7 @@ function displayTable(overlay, removeOldLayers) {
           var ind = list_order[i] - 1;
           properties.push(columns[ind]);
         }
+
         var url;
         var url_property;
         if (overlay.clickableLink) {
@@ -783,7 +795,8 @@ function displayTable(overlay, removeOldLayers) {
         }
 
         tablePopupObj = {"properties": properties, 
-                         "units": units, 
+                         "units": units,
+                         "list_order": list_order, 
                          "base_url": url,
                          "url_property": url_property,
                          "image_base_url": image_url,

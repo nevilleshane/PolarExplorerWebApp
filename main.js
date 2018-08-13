@@ -186,7 +186,9 @@ $(document).ready(function() {
 
         for (var i in tablePopupObj.properties) {
           var key = tablePopupObj.properties[i];
-          content += key + " = " + feature.get(key).replace("|", ",") + tablePopupObj.units[i] + "<br/>";
+          // make sure any keys which originally had duplicate names are renamed back to 
+          // their original vales by removing the #repeated_key# extension
+          content += key.replace("#repeated_key#", "") + " = " + feature.get(key).replace("|", ",") + tablePopupObj.units[i] + "<br/>";
         }
 
         if (url) content += "<a target='_blank' href='" + url + "'>More info</a>";
