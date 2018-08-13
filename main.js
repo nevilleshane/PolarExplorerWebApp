@@ -12,7 +12,7 @@ $(document).ready(function() {
     Display the menu when the menu button is clicked
   */
   $("#menu_btn").click(function() {
-      $("#menu").show();
+      $("#menu").show("slow");
       $("#menu_btn").hide();
   });
 
@@ -20,7 +20,7 @@ $(document).ready(function() {
     Hide the menu when the hide button is clicked
   */
   $("#hide_btn").click(function() {
-      $("#menu").hide();
+      $("#menu").hide("slow");
       $("#menu_btn").show();
   });
 
@@ -28,12 +28,11 @@ $(document).ready(function() {
     Close the popup when the close button is clicked
   */
   $("#close_btn").click(function() {
-      $("#popup").hide();
-      if (isMobile) {
-        $("#menu").removeClass("disabled");
-        $("#menu").hide();
-        $("#menu_btn").show();
-      }
+    $("#popup").hide();
+    if (isMobile) {
+      $("#menu").removeClass("disabled");
+      $("#menufooter").removeClass("disabled");
+    }
   });
 
   /*
@@ -42,6 +41,12 @@ $(document).ready(function() {
   $("#silent_btn").click(function() {
     var audioElement = document.getElementById("popup_audio");
     audioElement.pause();
+    if (isMobile) {
+      $("#popup").hide();
+      $("#menu").removeClass("disabled");
+      $("#menu").hide();
+      $("#menu_btn").show();
+    }
   });
 
   /*
@@ -131,11 +136,14 @@ $(document).ready(function() {
   //display place names
   displayPlaceNameFeatures();
 
+
   /*
     Handle what happens if the user clicks on the map
   */
   map.on('click', function(evt) {
+    $("#new_user_btn").hide();
     $("#elev").text("");
+    $("#elev_triangle").hide();
     var x = evt.pixel[0];
     var y = evt.pixel[1];
 
@@ -196,7 +204,8 @@ $(document).ready(function() {
       var ratio1 = getPixelRatio(ctx1);
       var p1 = ctx1.getImageData(x*ratio1, y*ratio1, 1, 1).data; 
       var argb = "ARGB: " + p1[3] + ", " + p1[0] + ", " + p1[1] + ", " + p1[2];
-      $("#elev").text(argb).css({top:y-35+"px", left:x-10+"px", position:"absolute", color:"white"}).show();
+      $("#elev").text(argb).css({top:y-45+"px", left:x-40+"px", position:"absolute", color:"white"});
+      $("#elev_triangle").css({top:y-8+"px", left:x-8+"px"}).show();
 
     } else if (showElevation) {
 
@@ -220,7 +229,8 @@ $(document).ready(function() {
           } else {
             textColor = "#99ccff";
           }
-          $("#elev").text(response+" meters").css({top:y-35+"px", left:x-10+"px", position:"absolute", color:textColor}).show();
+          $("#elev").text(response+" meters").css({top:y-45+"px", left:x-40+"px", color:textColor});
+          $("#elev_triangle").css({top:y-8+"px", left:x-8+"px"}).show();
         }
       });
 
@@ -240,7 +250,9 @@ $(document).ready(function() {
       if (closest) {
         $("#col_sq").css('background-color', 'rgb('+closest+')');
         var z_val = scaleTable[closest];
-        $("#elev").text(z_val).css({top:y-35+"px", left:x-10+"px", position:"absolute", color:"white"}).show();
+        $("#elev").text(z_val).css({top:y-45+"px", left:x-40+"px", color:"white"});
+        $("#elev_triangle").css({top:y-8+"px", left:x-8+"px"}).show();
+
       }
     }
   });
@@ -397,7 +409,8 @@ function removeAllLayers(removeGMRT = false) {
   $("#legend").hide();
   $("#opacity").hide(); 
   $("#ldeo_label").hide();
-  $("#elev").text("");  
+  $("#elev").text("");
+  $("#elev_triangle").hide();  
   scaleTable = {};  
   scaleUnits = ""; 
   closer.click();
@@ -447,6 +460,11 @@ function showPopup(overlay) {
     $("#popup").hide();
     return;
   }
+  // $("#popup").show();
+  //     if (isMobile) {
+  //       $("#menu").addClass("disabled");
+  //       $("#menufooter").addClass("disabled");
+  //     }
   //get the text for the popup
   $.ajax({
     type: "GET",
@@ -461,11 +479,18 @@ function showPopup(overlay) {
       if (overlay.aboutAudioURL) {
         $("#audio_btn").click(function() {
           playAudio(overlay.aboutAudioURL);
+          if (isMobile) {
+            $("#popup").hide();
+            $("#menu").removeClass("disabled");
+            $("#menu").hide();
+            $("#menu_btn").show();
+          }
         });
       }
       $("#popup").show();
       if (isMobile) {
         $("#menu").addClass("disabled");
+        $("#menufooter").addClass("disabled");
       }
     }
   });
@@ -485,7 +510,7 @@ function playAudio(url) {
 */
 function showLegend(overlay) {
   $("#legend_img").attr("src",overlay.legendPath);
-  if (showLegendSetting) $("#legend").show();
+  if (showLegendSetting  && !isMobile) $("#legend").show();
 }
 
 /*
@@ -612,6 +637,9 @@ function displayLayer(layer, overlay, removeOldLayers) {
   }  
   if (overlay.type == "overlay_sequence") {
     $("#sequence").show();
+    if (isMobile) {
+      $("#layer_header").css("bottom","4.5em");
+    }
   }
 
   //on map 2 (the hidden map), just display top layer

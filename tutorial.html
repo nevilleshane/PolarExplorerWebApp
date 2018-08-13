@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-indigo.css">
+  <!-- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-indigo.css"> -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 
   <link href='https://fonts.googleapis.com/css?family=Londrina Outline' rel='stylesheet'>
@@ -23,7 +23,7 @@
 
   <nav class="w3-sidebar w3-bar-block w3-collapse w3-card" style="z-index:3;width:250px;" id="mySidebar">
     <h1 class="w3-bar-item w3-large">Polar Explorer Tutorial</h1>
-    <a class="w3-bar-item w3-button w3-indigo" href="#">Top</a>
+    <a class="w3-bar-item w3-button selected-item" href="#">Top</a>
     <a class="w3-bar-item w3-button" href="#welcome">Welcome To Polar Explorer</a>
     <a class="w3-bar-item w3-button" href="#navigating">Navigating The Maps</a>
     <a class="w3-bar-item w3-button" href="#selecting">Selecting A Topic</a></a>
@@ -34,15 +34,15 @@
 
 
   <div class="w3-main" style="margin-left:250px;">
-
-    <header class="w3-container w3-theme">
+    <header class="w3-container banner">
+      <button type="button" onclick="window.open('', '_self', ''); window.close();" class="back-btn">Back</button>
       <table>
         <tr>
           <td>
-            <img src="img/polar_explorer_logo.png" alt="logo" style="width:120px;height:120px;">
+            <img src="img/polar_explorer_logo.png" alt="logo" class="banner-logo">
           </td>
           <td>
-            <h1 class="w3-xxlarge">Polar Explorer Web Application Tutorial</h1>
+            <h1 class="banner-text">Polar Explorer Web Application Tutorial</h1>
           </td>
         </tr>
       </table>
@@ -97,7 +97,8 @@
                   <li>Questions: Each set of maps is organized around a question and each question has its own menu of topics.</li>
                   <li>Topics: Each Topic has its own map, info page, and 'about' with audio.</li>
                 </ul>
-              You can move the menu window by holding down the left mouse button over the header at the top and dragging it to a new location.</p>
+              </p>
+              <p>You can move the menu window by holding down the left mouse button over the header at the top and dragging it to a new location.</p>
             </td>
           </tr>
           <tr>
@@ -158,8 +159,8 @@
 
   <script type="text/javascript">
     $(".w3-button").click(function() {
-       $(".w3-button").removeClass("w3-indigo");
-       $(this).addClass("w3-indigo");
+       $(".w3-button").removeClass("selected-item");
+       $(this).addClass("selected-item");
     });
   </script>
 </body>

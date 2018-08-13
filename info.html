@@ -6,11 +6,11 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-indigo.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 
   <link href='https://fonts.googleapis.com/css?family=Londrina Outline' rel='stylesheet'>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+  <link rel="stylesheet" href="info.css" type="text/css">
   <link rel="shortcut icon" href="favicon.ico" />
   <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
@@ -22,17 +22,18 @@
 <body>
 <div class="w3-main" style="margin-left:0;">
 
-  <header class="w3-container w3-theme">
+  <header class="w3-container banner-header">
+    <button type="button" onclick="window.open('', '_self', ''); window.close();" class="back-btn">Back</button>
     <table>
       <tr>  
         <td>
           <a target="_blank" href="index.html" style="text-decoration: none;">
-            <img src="img/polar_explorer_logo.png" style="width:120px;height:120px;" alt="logo">
+            <img src="img/polar_explorer_logo.png" class="banner-logo" alt="logo">
           </a>
         </td>
         <td>
           <a target="_blank" href="index.html" style="text-decoration: none;">
-            <h1 class="w3-xxlarge">Polar Explorer Web Application</h1>
+            <h1 class="banner-text">Polar Explorer Web Application</h1>
           </a>
         </td>
       </tr>
@@ -40,13 +41,13 @@
   </header>
 
   <div id="frameContainer" class="w3-container" style="padding:5px">
-    <iframe id="iframe" frameborder="0" border="0" cellspacing="0" style="border-style: none; width: 100%; height: 100em;"></iframe>
+    <iframe id="iframe" frameborder="0" border="0" cellspacing="0"></iframe>
   </div>
 </div>
 
 <script type="text/javascript">
   $(document).ready(function() {
-    console.log("11:13");
+    console.log("10:29");
     var webpages_url = "http://app.earth-observer.org/data/web_pages/html/";
     var basemap_url = "http://app.earth-observer.org/data/basemaps/gmrt/";
 

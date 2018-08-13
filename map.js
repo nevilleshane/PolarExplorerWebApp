@@ -11,7 +11,8 @@ function MapClient(view, params) {
   isMobile = mobilecheck();
   var mobileZoomAdjust = 0;
   if (isMobile) {
-    mobileZoomAdjust = 1;
+    mobileZoomAdjust = 0.75;
+    $("#close_btn").text("Cancel");
   }
 
   //set the map view
@@ -123,6 +124,7 @@ $(document).ready(function() {
   */
   map.on('movestart', function(evt) {
     $("#elev").text("");
+    $("#elev_triangle").hide();
     //hide the hidden map whilst moving as it so the user doesn't see it
     $("#hidden_map").hide();
   });
