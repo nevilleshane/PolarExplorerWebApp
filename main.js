@@ -568,6 +568,8 @@ function getScaleTable(scalePath) {
 function setSlider(layer, overlay) {
   if (overlay.hideOpacitySlider) {
     ($("opacity").hide());
+    //change the min zoom to 1 for these layers, since they tend to be close ups.
+    map.getView().setMinZoom(1);
     return;
   }
   //only want to change opacity of top layer, so need to unbind previous layers
@@ -584,6 +586,8 @@ function setSlider(layer, overlay) {
   });
 
   $("#opacity").show();
+  //reset the min zoom level
+  map.getView().setMinZoom(params.zoom  - mobileZoomAdjust);
 }
 
 /*
@@ -642,6 +646,12 @@ function displayLayer(layer, overlay, removeOldLayers) {
     if (isMobile) {
       $("#layer_header").css("bottom","4.5em");
     }
+  }
+  if (overlay.numLevels == 1 && isMobile) {
+    //change the min zoom to 1 for these layers, since they tend to be close ups.
+    map.getView().setMinZoom(1);
+  } else {
+    map.getView().setMinZoom(params.zoom  - mobileZoomAdjust);
   }
 
   //on map 2 (the hidden map), just display top layer

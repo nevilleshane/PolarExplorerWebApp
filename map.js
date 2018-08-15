@@ -5,13 +5,15 @@ function MapClient(view, params) {
   placeNamesUrl = "http://app.earth-observer.org/data/overlays/WorldWFS";
 
   //set up the map
-  var map = new ol.Map({target: view});
+  var map = new ol.Map({
+    target: view
+  });
   this.map = map;
 
   isMobile = mobilecheck();
-  var mobileZoomAdjust = 0;
+  mobileZoomAdjust = 0;
   if (isMobile) {
-    mobileZoomAdjust = 0.75;
+    mobileZoomAdjust = 0.5;
     $("#close_btn").text("Cancel");
   }
 
@@ -19,9 +21,10 @@ function MapClient(view, params) {
   map.setView(new ol.View({
     center: [0, 0],
     zoom: params.zoom - mobileZoomAdjust,
-    minZoom: params.zoom - mobileZoomAdjust,
+    minZoom: params.zoom  - mobileZoomAdjust,
     projection: params.projection,
-    extent: params.view_extent
+    extent: params.view_extent,
+    enableRotation: false
   }));
 
   //load up the GMRT base layer
@@ -524,25 +527,13 @@ function displayNOAA(overlay, removeOldLayers, sequence) {
 function displayArcGIS(overlay, removeOldLayers, sequence) {
   console.log(overlay);
   var arcgisLayer;
-  if (overlay.source.indexOf("tiles2.arcgis.com") > -1) {
-    //some arcgis layers need to be read in as XYZ sources
-    arcgisLayer = new ol.layer.Tile({
-      source: new ol.source.XYZ({
-        url: overlay.source+"{z}/{y}/{x}",
-        crossOrigin: "anonymous"
-      }),
-      title: sequence ? "Sequence" : ""
-    });
-  } else {
-    arcgisLayer = new ol.layer.Tile({
-      source: new ol.source.TileArcGISRest({
-        url: overlay.source.replace("tile/", "").replace("http:", "https:").replace("www.coast", "maps1.coast"),
-        crossOrigin: 'anonymous',
-        wrapX: true
-      }),
-      title: sequence ? "Sequence" : ""
-    });
-  }
+  arcgisLayer = new ol.layer.Tile({
+    source: new ol.source.XYZ({
+      url: overlay.source.replace("http:", "https:").replace("www.coast", "maps1.coast")+"{z}/{y}/{x}",
+      crossOrigin: "anonymous"
+    }),
+    title: sequence ? "Sequence" : ""
+  });
   displayLayer(arcgisLayer, overlay, removeOldLayers);
 }
 

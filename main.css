@@ -18,7 +18,9 @@ html, body {
   height: 100%;
   width: 100%;
   top:0;
+  bottom:0;
   left:0;
+  right:0;
 }
 
 .triangle {
@@ -415,7 +417,9 @@ input:checked + .slider:before {
   z-index: 50;
 }
 
-
+button {
+  border-radius: 0;
+}
 
 @media screen and (max-width: 481px){
 
@@ -448,7 +452,7 @@ input:checked + .slider:before {
     border-radius: 10px;
     height: 95%;
     bottom: 2px;
-    left: 2px;
+    left: 5px;
     padding: 0;
     width: 95%;
     min-width: 0;
@@ -535,7 +539,8 @@ input:checked + .slider:before {
 
   #popup_text {
     line-height: 1.5em;
-    margin-bottom: 0;
+    margin: 0;
     padding-bottom: 0;
   }
+
 }
