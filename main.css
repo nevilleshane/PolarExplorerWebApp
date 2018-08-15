@@ -55,7 +55,7 @@ html, body {
 }
 
 #menu {
-  background: #f1f1f1;;
+  background: #f1f1f1;
   border: 2px solid #d3d3d3;
   bottom: 0;
   position: absolute;
@@ -212,13 +212,13 @@ tr {
 }
 
 #sequence_left {
-  float:left;
-  margin:1px;
+  float: left;
+  margin-left: 2px;
 }
 
 #sequence_right {
-  float:right;
-  margin:1px;
+  float: right;
+  margin-right: 2px;
 }
 
 #sequence_level {
@@ -419,6 +419,16 @@ input:checked + .slider:before {
 
 button {
   border-radius: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-color: #f1f1f1;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-size: 75%;
+  font-family: arial;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 481px){
