@@ -480,8 +480,10 @@ button {
   }
 
   #icons {
-    right: 0.2em;
-    bottom: 0.4em;
+/*    right: 0.2em;
+    bottom: 0.4em;*/
+    right: 0%;
+    bottom: 0%;
     position: absolute;
   }
 
