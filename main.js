@@ -260,10 +260,12 @@ $(document).ready(function() {
   });
 
   //Make the DIV element draggagle:
-  dragElement(document.getElementById(("menu")));
-  dragElement(document.getElementById(("popup")));
-  dragElement(document.getElementById(("legend")));
-  dragElement(document.getElementById(("settings")));  
+  if (!isMobile) {
+    dragElement(document.getElementById(("menu")));
+    dragElement(document.getElementById(("popup")));
+    dragElement(document.getElementById(("legend")));
+    dragElement(document.getElementById(("settings")));  
+  }
 });
 
 
@@ -521,32 +523,9 @@ function showTitle(title) {
   Display the layer credit
 */
 function showCredit(credit) {
-  console.log(credit);
-  console.log(toUnicode(credit));
-  credit = unicodeToChar(toUnicode(credit))
   $("#layer_credit").text("    Credit: " + credit);
 }
 
-
-function toUnicode(theString) {
-  var unicodeString = '';
-  for (var i=0; i < theString.length; i++) {
-    var theUnicode = theString.charCodeAt(i).toString(16).toUpperCase();
-    while (theUnicode.length < 4) {
-      theUnicode = '0' + theUnicode;
-    }
-    theUnicode = '\\u' + theUnicode;
-    unicodeString += theUnicode;
-  }
-  return unicodeString;
-}
-
-function unicodeToChar(text) {
-   return text.replace(/\\u[\dA-F]{4}/gi, 
-          function (match) {
-               return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
-          });
-}
 
 /* 
   set the link for the info button
@@ -731,9 +710,11 @@ function dragElement(elmnt) {
   if (document.getElementById(elmnt.id + "header")) {
     /* if present, the header is where you move the DIV from:*/
     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+    document.getElementById(elmnt.id + "header").ontouchstart = dragTouchStart;
   } else {
     /* otherwise, move the DIV from anywhere inside the DIV:*/
     elmnt.onmousedown = dragMouseDown;
+    elmnt.ontouchstart = dragTouchStart;
   }
 
   function dragMouseDown(e) {
@@ -745,6 +726,18 @@ function dragElement(elmnt) {
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
   }
+
+
+  function dragTouchStart(e) {
+    var touch = e.touches[0];
+    // get the mouse cursor position at startup:
+    pos3 = touch.clientX;
+    pos4 = touch.clientY;
+    document.ontouchend = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.ontouchmove = elementTouchDrag;
+  }
+
 
   function elementDrag(e) {
     e = e || window.event;
@@ -758,9 +751,24 @@ function dragElement(elmnt) {
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
   }
 
+  function elementTouchDrag(e) {
+    var touch = e.touches[0];
+    // calculate the new cursor position:
+    pos1 = pos3 - touch.clientX;
+    pos2 = pos4 - touch.clientY;
+    pos3 = touch.clientX;
+    pos4 = touch.clientY;
+    // alert("pos1: " + pos1 + " pos2: " + pos2)
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
   function closeDragElement() {
     /* stop moving when mouse button is released:*/
     document.onmouseup = null;
     document.onmousemove = null;
+    document.ontouchend = null;
+    document.ontouchmove = null;
   }
 }
