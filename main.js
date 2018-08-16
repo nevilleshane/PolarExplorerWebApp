@@ -277,8 +277,6 @@ function populateMenu(overlays) {
   //disable back button if no parents in list
   $("#back_btn").prop("disabled", parents.length === 0);
 
-
-
   //add menu items for each child overlay
   $.each(overlays, function(i) {
     var item;
@@ -344,6 +342,7 @@ function populateMenu(overlays) {
 function menuItemClicked(overlay, parent, icon) {
   //if current menu item, don't do anything
   if (icon.hasClass("fa-check")) return;
+
   //perform appropraite action depending on overlay type
   console.log(overlay.type);
   switch(overlay.type) {
@@ -462,11 +461,7 @@ function showPopup(overlay) {
     $("#popup").hide();
     return;
   }
-  // $("#popup").show();
-  //     if (isMobile) {
-  //       $("#menu").addClass("disabled");
-  //       $("#menufooter").addClass("disabled");
-  //     }
+
   //get the text for the popup
   $.ajax({
     type: "GET",
@@ -475,7 +470,7 @@ function showPopup(overlay) {
     success: function(response) {
       var text = response.replace(/â/g, "'").split(":");
       $("#popupheader").text(overlay.name);
-      $("#popup_text").text(text[1]);
+      $("#popup_text").text(text[1]).append(text[1] + "<br/><br/>");
 
       //play the audio
       if (overlay.aboutAudioURL) {
@@ -526,7 +521,31 @@ function showTitle(title) {
   Display the layer credit
 */
 function showCredit(credit) {
+  console.log(credit);
+  console.log(toUnicode(credit));
+  credit = unicodeToChar(toUnicode(credit))
   $("#layer_credit").text("    Credit: " + credit);
+}
+
+
+function toUnicode(theString) {
+  var unicodeString = '';
+  for (var i=0; i < theString.length; i++) {
+    var theUnicode = theString.charCodeAt(i).toString(16).toUpperCase();
+    while (theUnicode.length < 4) {
+      theUnicode = '0' + theUnicode;
+    }
+    theUnicode = '\\u' + theUnicode;
+    unicodeString += theUnicode;
+  }
+  return unicodeString;
+}
+
+function unicodeToChar(text) {
+   return text.replace(/\\u[\dA-F]{4}/gi, 
+          function (match) {
+               return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
+          });
 }
 
 /* 
@@ -595,6 +614,9 @@ function setSlider(layer, overlay) {
 */
 function displayLayer(layer, overlay, removeOldLayers) {
   
+  //hide new user button
+  $("#new_user_btn").hide();
+
   //determine whether place names should be shown
   showSeabedNames = overlay.showSeabedNames;
   
@@ -644,7 +666,11 @@ function displayLayer(layer, overlay, removeOldLayers) {
   if (overlay.type == "overlay_sequence") {
     $("#sequence").show();
     if (isMobile) {
-      $("#layer_header").css("bottom","4.5em");
+      $("#layer_header").addClass("layer_header_sequence");
+    }
+  } else {
+    if (isMobile) {
+      $("#layer_header").removeClass("layer_header_sequence");
     }
   }
   if (overlay.numLevels == 1 && isMobile) {

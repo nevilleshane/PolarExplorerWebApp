@@ -57,7 +57,7 @@ td {
 	top: 1%;
 }
 
-@media screen and (max-width: 481px){
+@media screen and (max-width: 481px) and (orientation: portrait){
 	.banner-logo {
 		height: 45px;
 		width: 45px;
@@ -88,6 +88,41 @@ td {
 
 	.back-btn {
 		font-size: 70%;
+		top:2%;
+	}
+}
+
+@media screen and (max-height: 481px) and (orientation: landscape) {
+	.banner-logo {
+		height: 45px;
+		width: 45px;
+	}
+
+	.banner-text {
+		font-size: 150%;
+		margin-top: 15px;
+	}
+
+	h1 {
+		font-size: 110%;
+		font-style: bold;
+	}
+
+	h2 {
+		font-size: 90%;
+		font-style: bold;
+	}
+
+	p {
+		font-size: 70%;
+	}
+
+	li {
+		font-size: 70%;
+	}
+
+	.back-btn {
+		font-size: 100%;
 		top:2%;
 	}
 }

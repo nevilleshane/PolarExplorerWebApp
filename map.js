@@ -628,8 +628,8 @@ function switchProjection(proj) {
       params = gmrt_params.np;
       break;
   }
-  map.getView().setZoom(params.zoom);
   if (map.getView().getProjection() == params.projection) return;
+  map.getView().setZoom(params.zoom);
   map.removeLayer(gmrtLayer);
 
   view = new ol.View({
@@ -637,7 +637,8 @@ function switchProjection(proj) {
     zoom: params.zoom,
     minZoom: 2,
     projection: params.projection,
-    extent: params.view_extent
+    extent: params.view_extent,
+    enableRotation: false
   });
   map.setView(view);
 

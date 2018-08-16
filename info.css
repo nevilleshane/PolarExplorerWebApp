@@ -35,24 +35,41 @@
 
 iframe {
 	border-style: none; 
- height: 100em;
+  height: 100em;
 	width: 100%; 
 }
 
-@media screen and (max-width: 481px){
+@media screen and (max-width: 481px) and (orientation: portrait) {
 	.banner-logo {
 		height: 45px;
 		width: 45px;
 	}
 
 	.banner-text {
-		font-size: 100%;
+		font-size: 120%;
 		margin-top: 25px;
 	}
 
 	.back-btn {
 		font-size: 70%;
-		top:2%;
+		top: 2%;
 	}
 
+}
+
+@media screen and (max-height: 481px) and (orientation: landscape) {
+	.banner-logo {
+		height: 45px;
+		width: 45px;
+	}
+
+	.banner-text {
+		font-size: 150%;
+		margin-top: 15px;
+	}
+
+	.back-btn {
+		font-size: 100%;
+		top: 2%;
+	}
 }

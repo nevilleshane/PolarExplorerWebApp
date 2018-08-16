@@ -131,7 +131,9 @@ tr {
   position: absolute;
   height: 75%;
   overflow: auto; 
-  padding: 10px;
+  padding: 10px 10px 0 10px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 #settings {
@@ -148,15 +150,15 @@ tr {
 }
 
 #settingsbody {
-  margin:15px;
+  margin: 15px;
 }
 
 .settings-table {
-  padding:5px;
+  padding: 5px;
   background: #f1f1f1;
-  border-collapse:separate;
-  border-radius:20px;
-  -moz-border-radius:20px;
+  border-collapse: separate;
+  border-radius: 20px;
+  -moz-border-radius: 20px;
 }
 
 .settings-table td{
@@ -194,9 +196,6 @@ tr {
   bottom: 1em;
   left: 36em;
   z-index: 50;
-}
-
-#opacity_slider {
 }
 
 #sequence {
@@ -256,15 +255,15 @@ tr.disabled {
 
 #scaleline {
   position: absolute;
-  top: 2.2em;
-  right: 17em;
+  top: 4%;
+  right: 20%;
   z-index: 50;
 }
 
 #layer_header {
   position: absolute;
-  top: 1em;
-  left: 25em;
+  top: 2%;
+  left: 30%;
   z-index: 50;
 }
 
@@ -431,7 +430,7 @@ button {
   font-weight: bold;
 }
 
-@media screen and (max-width: 481px){
+@media screen and (max-width: 481px) and (orientation: portrait) {
 
   .window-header {
     width: 97.5%;
@@ -480,22 +479,19 @@ button {
   }
 
   #icons {
-/*    right: 0.2em;
-    bottom: 0.4em;*/
-    right: 0%;
-    bottom: 0%;
+    right: 2%;
+    bottom: 2%;
     position: absolute;
   }
 
   #scaleline {
-    top: 2.2em;
-    right: 30%;
+    top: 7%;
+    right: 35%;
   }
 
   #opacity {
     bottom: 0.2em;
     left: 2em;
-    z-index: 50;
   }
 
   .ol-control button {
@@ -511,14 +507,18 @@ button {
 
   #layer_header {
     top: auto;
-    bottom: 2em;
-    left: 0.2em;
+    bottom: 5%;
+    left: 2%;
   }
 
   .layer_header_text {
     font-size: 80%;
     margin-right:0;
     padding:0;
+  }
+
+  .layer_header_sequence {
+    bottom: 10%;
   }
 
   #sequence {
@@ -552,7 +552,154 @@ button {
   #popup_text {
     line-height: 1.5em;
     margin: 0;
-    padding-bottom: 0;
   }
+
+}
+
+@media screen and (max-height: 481px) and (orientation: landscape) {
+ .window-header {
+    width: 98.5%;
+    padding: 5px 0 5px 10px;
+  }
+
+  .window-footer {
+    width: 98.5%;
+    padding: 5px 0 5px 10px;
+  }
+
+  #menu {
+    bottom: 0;
+    border-color: black;
+    height: 100%;
+    right: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  #menubody {
+    height: 75%;
+    width: 100%;
+  }
+
+
+  #popup {
+    border-radius: 10px;
+    height: 95%;
+    bottom: 2px;
+    left: 15px;
+    padding: 0;
+    width: 95%;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    overflow: hidden;  
+    resize: none;
+    border-color: blue
+  }
+
+  #info {
+    bottom: 0.3em;
+    left: 0.5em;
+  }
+
+  #icons {
+    right: 2%;
+    bottom: 2%;
+    position: absolute;
+  }
+
+  #scaleline {
+    top: 12%;
+    right: 20%;
+  }
+
+  #opacity {
+    bottom: 0;
+    left: 5%;
+  }
+
+  #opacity_slider {
+    width: 150%;
+  }
+
+  .ol-control button {
+    font-size: 50%;
+    height: 1.1em;
+    width: 1.1em;
+  }
+
+  .ol-mouse-position {
+    left: 45%;
+    top: 0.6em;
+  }
+
+  #layer_header {
+    top: auto;
+    bottom: 10%;
+    left: 2%;
+  }
+
+  .layer_header_text {
+    font-size: 100%;
+    margin-right:0;
+    padding:0;
+  }
+
+  .layer_header_sequence {
+    bottom: 20%;
+  }
+
+  #sequence {
+    width: 50%;
+    height: 2em;
+    bottom: 12%;
+    left: 25%;
+  }
+
+  #settings {
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 0;
+    width: 100%;
+    border-color: black;
+  }
+
+  #table-popup-content {
+    font-size: 60%;
+  }
+
+  #new_user_btn {
+    left: 45%;
+    bottom: 20%;
+  }
+
+  #elev {
+    margin-top: 14px;
+  }
+
+  #popup_text {
+    line-height: 1.5em;
+    margin: 0;
+  }
+
+  .switch {
+    width: 44px;
+    height: 24px;
+  }
+
+  .slider:before {
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+
 
 }
