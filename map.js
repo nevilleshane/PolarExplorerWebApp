@@ -543,6 +543,7 @@ function displayArcGIS(overlay, removeOldLayers, sequence) {
 */
 function displayXBMap(overlay, removeOldLayers, sequence) {
   console.log(overlay);
+
   //switch projection
   var proj = overlay.mapProjection;
   switchProjection(proj);
@@ -587,7 +588,6 @@ function displayXBMap(overlay, removeOldLayers, sequence) {
     }),
     title: sequence ? "Sequence" : ""
   });
-
   //use the tileCoords to geerate the URL name
   function getNameWithTileX(tileCoord) {
     var x = tileCoord[1];
@@ -609,7 +609,6 @@ function displayXBMap(overlay, removeOldLayers, sequence) {
     var name = first + second + "_320";
     return name;
   }
-
   displayLayer(xbMapLayer, overlay, removeOldLayers);
 }
 

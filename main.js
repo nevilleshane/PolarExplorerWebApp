@@ -1,6 +1,20 @@
 $(document).ready(function() {
 
-  // alert('new4');
+// disableBounce();
+//   /*
+//     Disable default touch moving of screen on ipads
+//   */
+//   function disableBounce() {
+//     $(window).bind(
+//       'touchmove',
+//        function(e) {
+//         e.preventDefault();
+//       }
+//     );
+//   }
+
+// alert("width: " + $(window).width() + " height: " + screen.height)
+// alert(window.matchMedia('screen and (min-height: 481px)').matches)
 
   if (isMobile) {
     // Start with the menu hidden in mobile mode
@@ -261,10 +275,11 @@ $(document).ready(function() {
 
   //Make the DIV element draggagle:
   if (!isMobile) {
-    dragElement(document.getElementById(("menu")));
-    dragElement(document.getElementById(("popup")));
-    dragElement(document.getElementById(("legend")));
-    dragElement(document.getElementById(("settings")));  
+    dragElement(document.getElementById(("menu")), false);
+    dragElement(document.getElementById(("popup")), false);
+    //for tablets, make the whole of the legend draggable, since it will be smaller
+    dragElement(document.getElementById(("legend")), $("#legend").css("zoom") < 1);
+    dragElement(document.getElementById(("settings")), false);  
   }
 });
 
@@ -404,7 +419,7 @@ function menuItemClicked(overlay, parent, icon) {
   set to true, eg if the overlay.hideOpacitySlider has been set to true, or if 
   this is a multi_layer overlay 
 */
-function removeAllLayers(removeGMRT = false) {    
+function removeAllLayers(removeGMRT) {    
   map.setLayerGroup(new ol.layer.Group());
   if (!removeGMRT) map.addLayer(gmrtLayer);
   if (showSeabedNames) map.addLayer(placeNamesLayer);
@@ -585,7 +600,12 @@ function setSlider(layer, overlay) {
 
   $("#opacity").show();
   //reset the min zoom level
-  map.getView().setMinZoom(params.zoom  - mobileZoomAdjust);
+  if (overlay.numLevels == 1 && isMobile) {
+    //change the min zoom to 1 for these layers, since they tend to be close ups.
+    map.getView().setMinZoom(1);
+  } else {
+    map.getView().setMinZoom(params.zoom  - mobileZoomAdjust);
+  }
 }
 
 /*
@@ -606,7 +626,7 @@ function displayLayer(layer, overlay, removeOldLayers) {
   //don't remove base layer of multilayer with overlay sequence
   if (overlay.parent_type == "multi_layer" && overlay.type == "overlay_sequence") removeOldLayers = false;
   if (removeOldLayers) removeAllLayers(removeGMRT);
-  
+
   //switch projection if necessary
   if (!overlay.mapProjection) {
     if (map.getView().getProjection() != merc_proj) switchProjection(0); 
@@ -644,13 +664,6 @@ function displayLayer(layer, overlay, removeOldLayers) {
   }  
   if (overlay.type == "overlay_sequence") {
     $("#sequence").show();
-    if (isMobile) {
-      $("#layer_header").addClass("layer_header_sequence");
-    }
-  } else {
-    if (isMobile) {
-      $("#layer_header").removeClass("layer_header_sequence");
-    }
   }
   if (overlay.numLevels == 1 && isMobile) {
     //change the min zoom to 1 for these layers, since they tend to be close ups.
@@ -704,10 +717,10 @@ function getClosestColor(r0,g0,b0) {
 /*
   functions to hangle dragging an element by its header
 */
-function dragElement(elmnt) {
+function dragElement(elmnt, dragOnAll) {
   if (elmnt === null) return;
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
+  if (document.getElementById(elmnt.id + "header") && !dragOnAll) {
     /* if present, the header is where you move the DIV from:*/
     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
     document.getElementById(elmnt.id + "header").ontouchstart = dragTouchStart;
