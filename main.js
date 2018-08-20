@@ -13,7 +13,7 @@ $(document).ready(function() {
 //     );
 //   }
 
- alert("width: " + screen.width + " height: " + screen.height)
+// alert("width: " + $(document).width() + " height: " + $(window).height());
 // alert(window.matchMedia('screen and (min-height: 481px)').matches)
 
   if (isMobile) {

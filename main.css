@@ -452,7 +452,8 @@ button {
 }
 
 /* smart phone portrait */
-@media screen and (max-device-width: 480px) and (orientation: portrait) {
+@media screen and (max-width: 480px) and (orientation: portrait) {
+/*@media screen and (max-device-width: 480px) and (orientation: portrait) {*/
 /*@media (min-width: 320px) and (max-width: 480px) {*/
   .mobile_portrait {
     display: block;
@@ -579,7 +580,8 @@ button {
 }
 
 /* smart phone landscape */
-@media only screen and (max-device-height: 480px) and (orientation: landscape) {
+@media screen and (max-height: 420px) and (orientation: landscape) {
+/*@media only screen and (max-device-height: 480px) and (orientation: landscape) {*/
 /*@media (min-width: 481px) and (max-width: 767px) {*/
 
   .mobile_landscape {
@@ -733,7 +735,8 @@ button {
 
 
 /* small tablets landscape */
-@media only screen and (min-device-height: 481px) and (max-device-height: 767px) and (orientation: landscape) {
+@media only screen and (min-height: 421px) and (max-height: 599px) and (orientation: landscape) {
+/*@media only screen and (min-device-height: 481px) and (max-device-height: 767px) and (orientation: landscape) {*/
 /*@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {  */
   .small_tablet_landscape {
     display: block;
@@ -826,7 +829,7 @@ button {
 
 
 /* small tablets portrait*/
-@media only screen and (min-device-width: 481px) and (max-device-width: 767px) and (orientation: portrait) {
+@media only screen and (min-width: 481px) and (max-width: 767px) and (orientation: portrait) {
 /*@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait){  */
   .small_tablet_portrait {
     display: block;
@@ -948,7 +951,8 @@ button {
 
 
 /* tablets landscape*/
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (min-device-height: 768px) and (orientation: landscape) {
+@media only screen and (min-height: 600px) and (max-height: 1024px) and (orientation: landscape) {
+/*@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (min-device-height: 768px) and (orientation: landscape) {*/
 /*@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {  */
   .tablet_landscape {
     display: block;
@@ -1019,7 +1023,8 @@ button {
 
 
 /* tablets portrait*/
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+/*@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {*/
 /*@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait){  */
   .tablet_portrait {
     display: block;
