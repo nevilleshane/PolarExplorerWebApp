@@ -202,7 +202,13 @@ $(document).ready(function() {
           var key = tablePopupObj.properties[i];
           // make sure any keys which originally had duplicate names are renamed back to 
           // their original vales by removing the #repeated_key# extension
-          content += key.replace("#repeated_key#", "") + " = " + feature.get(key).replace("|", ",") + tablePopupObj.units[i] + "<br/>";
+          var key_text = key.replace("#repeated_key#", "");
+          var value = feature.get(key);
+          var value_text = "n/a";
+          if (value) {
+            value_text = feature.get(key).replace("|", ",") + " " + tablePopupObj.units[i]; 
+          }
+          content +=  key_text + " = " + value_text + "<br/>";
         }
 
         if (url) content += "<a target='_blank' href='" + url + "'>More info</a>";

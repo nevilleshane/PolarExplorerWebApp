@@ -8,7 +8,7 @@ html, body {
 
 .mobile_portrait, .mobile_landscape, .tablet_portrait, .tablet_landscape, .small_tablet_portrait, .small_tablet_landscape{
   display: none;
-  z_index: 50;
+  z-index: 50;
 }
 
 
@@ -24,10 +24,11 @@ html, body {
   margin: 0;
   height: 100%;
   width: 100%;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 
 .triangle {
@@ -37,7 +38,7 @@ html, body {
   border-right: 5px solid transparent;
   border-top: 5px solid #f00;
   position: absolute;
-  z-index:59;
+  z-index:50;
 }
 
 #elev {
@@ -46,7 +47,7 @@ html, body {
   margin-right: auto;
   left: 0;
   right: 0;
-  z-index: 59;
+  z-index: 50;
   cursor: default;
 }
 
@@ -58,7 +59,7 @@ html, body {
   bottom: 0;
   right: 3em;
   position: absolute;
-  z-index: 50;
+  z-index: 60;
 }
 
 #menu {
@@ -71,7 +72,7 @@ html, body {
   right: 3%;
   padding: 0.5em;
   width: 23%;
-  z-index: 60;
+  z-index: 70;
 }
 
 #menubody {
@@ -126,7 +127,7 @@ tr {
   left: 2%;
   padding: 0.5em;
   width: 28%;
-  z-index: 62;
+  z-index: 70;
   overflow: hidden;  
   resize: both;
   min-height:42%;
@@ -153,7 +154,7 @@ tr {
   left: 40%;
   padding: 0.5em;
   width: 23%;
-  z-index: 60;
+  z-index: 90;
 }
 
 #settingsbody {
@@ -175,7 +176,7 @@ tr {
 .window-header {
     padding: 10px;
     cursor: move;
-    z-index: 61;
+    /*z-index: 61;*/
     background-color:  #071d3f;
     color: #fff;
 }
@@ -185,7 +186,7 @@ tr {
     position: absolute;
     padding: 10px;
     cursor: move;
-    z-index: 61;
+    /*z-index: 61;*/
     background-color: #071d3f;
     color: #fff;
     width: 90%;
@@ -195,14 +196,14 @@ tr {
   position: absolute;
   bottom: 2%;
   left: 40%;
-  z-index: 50;
+  z-index: 40;
 }
 
 #opacity {
   position: absolute;
   bottom: 1.7%;
   left: 42%;
-  z-index: 50;
+  z-index: 40;
 }
 
 #sequence {
@@ -214,7 +215,7 @@ tr {
   position: absolute;
   bottom: 5.5%;
   left: 39%;
-  z-index: 50;
+  z-index: 40;
 }
 
 #sequence_left {
@@ -247,7 +248,7 @@ tr.disabled {
   position: absolute;
   top: 2%;
   left: 4%;
-  z-index: 62;
+  z-index: 60;
 }
 
 #legendheader {
@@ -255,7 +256,7 @@ tr.disabled {
   text-align:center;
   padding: 5px;
   cursor: move;
-  z-index: 63;
+  /*z-index: 63;*/
   background-color: #071d3f;
   color: #fff;
   object-fit: contain;
@@ -265,14 +266,14 @@ tr.disabled {
   position: absolute;
   top: 4%;
   right: 20%;
-  z-index: 50;
+  z-index: 30;
 }
 
 #layer_header {
   position: absolute;
   top: 2%;
   left: 30%;
-  z-index: 50;
+  z-index: 20;
 }
 
 .layer_header_text {
@@ -288,6 +289,17 @@ tr.disabled {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+
+.ol-control button {
+  z-index: 30;
+}
+
+.ol-mouse-position {
+  left: 45%;
+  top: 0.6em;
+  z-index: 30;
+}
+
 .ol-popup {
   position: absolute;
   background-color: white;
@@ -299,6 +311,7 @@ tr.disabled {
   bottom: 12px;
   left: -50px;
   min-width: 150px;
+  z-index: 80;
 }
 .ol-popup:after, .ol-popup:before {
   top: 100%;
@@ -421,7 +434,7 @@ input:checked + .slider:before {
   position: absolute;
   bottom: 10%;
   left: 48%;
-  z-index: 50;
+  z-index: 60;
 }
 
 button {
@@ -805,6 +818,8 @@ button {
 
   #sequence {
     bottom: 10%;
+    width: 25%;
+    left: 38%;
   }
 }
 
@@ -821,7 +836,7 @@ button {
     font-size: 70%;
     height: 45%;
     width: 34%; 
-    right: 1%;
+    right: 0.5%;
   }
 
   button {
@@ -835,6 +850,7 @@ button {
     width: 34%;
     height: 40%;
     bottom: 1%;
+    left: 0.5%;
   }
 
   .window-header {
@@ -908,6 +924,24 @@ button {
   #opacity_slider {
     width: 70%;
   } 
+
+  #info {
+    left: 37%;
+  }
+
+  #sequence{ 
+    left: 37.25% ;
+    width: 25%; 
+    font-size: 60%;
+  }
+
+  #sequence_left {
+    margin-left: 1px;
+  }
+
+  #sequence_right {
+    margin-right: 1px;
+  }
 }
 
 
@@ -994,21 +1028,22 @@ button {
   #menu {
     font-size: 80%;
     height: 45%;
-    width: 34%; 
+    width: 33%; 
     right: 1%;
   }
 
   button {
     font-size: 75%;
-    margin-left: 2px;
-    margin-right: 2px;
+    margin-left: 1px;
+    margin-right: 1px;
   }
 
   #popup {
     font-size: 80%;
-    width: 34%;
+    width: 33%;
     height: 40%;
     bottom: 1%;
+    left: 1%;
   }
 
   .window-header {
@@ -1026,6 +1061,7 @@ button {
     width: 35%;
     left: 35%;
     bottom: 50%;
+    z-index: 90;
   }
 
   .switch {
@@ -1071,5 +1107,15 @@ button {
 
   .ol-control button {
     zoom: 0.8;
+  }
+
+  #info {
+    left: 37%;
+  }
+
+  #sequence{ 
+    left: 36.5% ;
+    width: 26.5%; 
+    font-size: 90%;
   }
 }
