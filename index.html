@@ -6,30 +6,30 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <!-- the viewport is important for mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+  <link rel="stylesheet" href="css/ol.css" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Londrina Outline' rel='stylesheet'>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-  <link rel="stylesheet" href="main.css" type="text/css">
-  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="stylesheet" href="css/main.css" type="text/css">
+  <link rel="shortcut icon" href="img/favicon.ico" />
   <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
-  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-  <script src="https://openlayers.org/en/v4.6.5/build/ol-debug.js"></script>
+  <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+  <script type="text/javascript" src="js/ol-debug.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script type="text/javascript" src="https://npmcdn.com/csv2geojson@latest/csv2geojson.js"></script>
-  <script type="text/javascript" src="mapOverlays.json"></script>
-  <script type="text/javascript" src="placeNames.json"></script>
-  <script type="text/javascript" src="placeNameFeatures.json"></script>
-  <script type="text/javascript" src="map.js"></script>
-  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="js/mapOverlays.json"></script>
+  <script type="text/javascript" src="js/placeNames.json"></script>
+  <script type="text/javascript" src="js/placeNameFeatures.json"></script>
+  <script type="text/javascript" src="js/map.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
 </head>
 
 <body>
 <div class="wrapper">
   <div id="hidden_map" class="map-div"></div>
   <div id="map" class="map-div">
-<!-- 
-    <h1 class="mobile_portrait">mobile portrait</h1>
+
+<!--     <h1 class="mobile_portrait">mobile portrait</h1>
     <h1 class="mobile_landscape">mobile landscape</h1>
     <h1 class="tablet_portrait">tablet portrait</h1>
     <h1 class="tablet_landscape">tablet landscape</h1>
