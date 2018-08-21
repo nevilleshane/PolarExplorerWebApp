@@ -772,13 +772,11 @@ function dragElement(elmnt, dragOnAll) {
 
   function elementTouchDrag(e) {
     var touch = e.touches[0];
-    console.log(touch)
     // calculate the new cursor position:
     pos1 = pos3 - touch.clientX;
     pos2 = pos4 - touch.clientY;
     pos3 = touch.clientX;
     pos4 = touch.clientY;
-    // alert("pos1: " + pos1 + " pos2: " + pos2)
     // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
@@ -790,5 +788,11 @@ function dragElement(elmnt, dragOnAll) {
     document.onmousemove = null;
     document.ontouchend = null;
     document.ontouchmove = null;
+
+    // convert positioning from pixels to % so that elements can be reposition if the orientation of a tablet is changed
+    var w = $(document).width();
+    var h = $(document).height();
+    elmnt.style.top = (parseInt(elmnt.style.top.replace("px", "")) / h * 100) + "%";
+    elmnt.style.left = (parseInt(elmnt.style.left.replace("px", "")) / w * 100) + "%";
   }
 }
