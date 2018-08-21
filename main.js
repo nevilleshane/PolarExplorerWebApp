@@ -772,6 +772,7 @@ function dragElement(elmnt, dragOnAll) {
 
   function elementTouchDrag(e) {
     var touch = e.touches[0];
+    console.log(touch)
     // calculate the new cursor position:
     pos1 = pos3 - touch.clientX;
     pos2 = pos4 - touch.clientY;
