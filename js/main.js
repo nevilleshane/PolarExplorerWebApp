@@ -4,7 +4,6 @@ $(document).ready(function() {
 
   if (isMobile) {
     // Start with the menu hidden in mobile mode
-    $("#menu").hide();
     $("#menu_btn").show();
   }
 
@@ -12,7 +11,11 @@ $(document).ready(function() {
     Display the menu when the menu button is clicked
   */
   $("#menu_btn").click(function() {
-      $("#menu").show("slow");
+      if (isMobile) {
+        $('.flipper').addClass('flip'); 
+      } else {
+        $("#menu").show("slow");
+      }
       $("#menu_btn").hide();
   });
 
@@ -20,7 +23,11 @@ $(document).ready(function() {
     Hide the menu when the hide button is clicked
   */
   $("#hide_btn").click(function() {
-      $("#menu").hide("slow");
+      if (isMobile) {
+        $('.flipper').removeClass('flip'); 
+      } else {
+        $("#menu").hide("slow");
+      }
       $("#menu_btn").show();
   });
 
@@ -28,7 +35,7 @@ $(document).ready(function() {
     Close the popup when the close button is clicked
   */
   $("#close_btn").click(function() {
-    $("#popup").hide();
+    $("#popup").hide("fade");
     if (isMobile) {
       $("#menu").removeClass("disabled");
       $("#menufooter").removeClass("disabled");
@@ -44,7 +51,7 @@ $(document).ready(function() {
     if (isMobile) {
       $("#popup").hide();
       $("#menu").removeClass("disabled");
-      $("#menu").hide();
+      $('.flipper').removeClass('flip'); 
       $("#menu_btn").show();
     }
   });
@@ -122,6 +129,7 @@ $(document).ready(function() {
 
   // Set some initial values
   parents = [];
+  parent_titles = [];
   showElevation = true;
   scaleTable = {};
   scaleUnits = "";
@@ -279,13 +287,17 @@ $(document).ready(function() {
 /*
   Populate the menu using the overlays in the mapOverlays.json file
 */
-function populateMenu(overlays) {
+function populateMenu(overlays, title) {
   var menu = $("#menu_list");
   //clear the menu
   menu.empty();
   //disable back button if no parents in list
   $("#back_btn").prop("disabled", parents.length === 0);
 
+  if (!title) {
+    title = "Choose a topic";
+  }
+  $("#menuheader").text(title);
   //add menu items for each child overlay
   $.each(overlays, function(i) {
     var item;
@@ -327,10 +339,10 @@ function populateMenu(overlays) {
       row.addClass("menu_item");
       //handle click event
       item.click(function() {
-        menuItemClicked(overlay, overlays, icon);
+        menuItemClicked(overlay, overlays, icon, title);
       });
       more.click(function() {
-        menuItemClicked(overlay, overlays, icon);
+        menuItemClicked(overlay, overlays, icon, title);
       });
       //if overlay is of type dir, add an angle-right icon
       if (overlay.type == "dir") {
@@ -348,7 +360,7 @@ function populateMenu(overlays) {
 /*
   Function to handle what to do when a menu item is clicked
 */
-function menuItemClicked(overlay, parent, icon) {
+function menuItemClicked(overlay, parent, icon, title) {
   //if current menu item, don't do anything
   if (icon.hasClass("fa-check")) return;
 
@@ -359,13 +371,22 @@ function menuItemClicked(overlay, parent, icon) {
     case "dir":
       //keep track of parents in case back button is pressed
       parents.push(parent);
+      parent_titles.push(title);
+
       var $menu = $("#menu_list");
       //repopulate menu with childrem of this item
-      populateMenu(overlay.children);
+      populateMenu(overlay.children, overlay.name);
+
+      $("#menuheader").hide().show("slide", { direction: "right" }, 500);
+      $("#menubody").hide().show("slide", { direction: "right" }, 500);
+
+          
       $("#back_btn").unbind('click').click(function() {
         //repopulate menu with parent
-        populateMenu(parents.pop());
-      }).show();
+        populateMenu(parents.pop(), parent_titles.pop());
+        $("#menuheader").hide().show("slide", { direction: "left" }, 500);
+        $("#menubody").hide().show("slide", { direction: "left" }, 500);
+      });
       break;
     case "tile_512":
       displayTile512(overlay, true);
@@ -467,7 +488,7 @@ function removeAllTables() {
 */
 function showPopup(overlay) {
   if (!overlay.aboutAlertURL) {
-    $("#popup").hide();
+    $("#popup").hide("fade");
     return;
   }
 
@@ -488,12 +509,12 @@ function showPopup(overlay) {
           if (isMobile) {
             $("#popup").hide();
             $("#menu").removeClass("disabled");
-            $("#menu").hide();
+            $('.flipper').removeClass('flip'); 
             $("#menu_btn").show();
           }
         });
       }
-      $("#popup").show();
+      $("#popup").show("fade",{},1000);
       if (isMobile) {
         $("#menu").addClass("disabled");
         $("#menufooter").addClass("disabled");

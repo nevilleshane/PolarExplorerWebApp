@@ -301,7 +301,7 @@ function displayTile512(overlay, removeOldLayers, sequence) {
 */
 function displayWMS512(overlay, removeOldLayers, sequence) {
   console.log(overlay);
-  var url = overlay.source.replace("http://neowms", "https://neo");
+  var url = overlay.source;
   var wmsLayer = new ol.layer.Tile({
     type: 'base',
     title: overlay.title,
@@ -473,7 +473,7 @@ function displayNOAA(overlay, removeOldLayers, sequence) {
     product = parts[0] + "." + parts[1];
 
     $.ajax({
-      url: "noaaSourcePaths.json",
+      url: "js/noaaSourcePaths.json",
       dataType: "json",
     }).done(function(data) { 
         tileUrl = data[product];
@@ -529,7 +529,7 @@ function displayArcGIS(overlay, removeOldLayers, sequence) {
   var arcgisLayer;
   arcgisLayer = new ol.layer.Tile({
     source: new ol.source.XYZ({
-      url: overlay.source.replace("http:", "https:").replace("www.coast", "maps1.coast")+"{z}/{y}/{x}",
+      url: overlay.source + "{z}/{y}/{x}",
       crossOrigin: "anonymous"
     }),
     title: sequence ? "Sequence" : ""
@@ -712,7 +712,7 @@ function displayTable(overlay, removeOldLayers) {
   }
   if (overlay.symbolColorColumn) colorCol = overlay.symbolColorColumn-1;
   $.get({
-    url: overlay.source.replace("http://earthquake.usgs", "https://earthquake.usgs"),
+    url: overlay.source,
     dataType: "text",
     crossOrigin: true,
     success: function(response) {
