@@ -155,9 +155,10 @@ $(document).ready(function() {
     var x = evt.pixel[0];
     var y = evt.pixel[1];
 
-    //first check if clicking on a circle in a table layer
+    //first check if clicking on a circle in a table layer (and not a placeName)
     var feature = map.forEachFeatureAtPixel(evt.pixel, 
       function(feature, layer) {
+        if (layer.get('title') == "placeNamesLayer") return; 
         return feature;
       }, {"hitTolerance":7});
     if (feature) {
