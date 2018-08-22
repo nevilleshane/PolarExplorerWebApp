@@ -26,11 +26,11 @@
 </head>
 
 <body>
-<div class="wrapper flip-container">
-  <div id="hidden_map" class="map-div" hidden></div>
+  <div class="wrapper flip-container">
+    <div id="hidden_map" class="map-div" hidden></div>
 
-  <div class="flipper">
-    <div id="map" class="map-div front">
+    <div class="flipper">
+      <div id="map" class="map-div front">
 
   <!--     <h1 class="mobile_portrait">mobile portrait</h1>
       <h1 class="mobile_landscape">mobile landscape</h1>
@@ -39,135 +39,138 @@
       <h1 class="small_tablet_portrait">small tablet portrait</h1>
       <h1 class="small_tablet_landscape">small tablet landscape</h1> -->
 
-      <button class="btn" id="new_user_btn" onclick="window.open('tutorial.html')">New User?</button>
+        <button class="btn" id="new_user_btn" onclick="window.open('tutorial.html')">New User?</button>
 
-      <p id="elev" class="screen_text"></p>
-      <div id="elev_triangle" class="triangle" hidden></div>
-     
-      <div id="icons">
-        <button id="menu_btn" hidden><i class="fa fa-bars fa-2x"></i></button>
-      </div>
+        <p id="elev" class="screen_text"></p>
+        <div id="elev_triangle" class="triangle" hidden></div>
 
-      <div id="layer_header">
-        <p id="layer_title" class="layer_header_text screen_text"></p>
-        <p id="layer_credit" class="layer_header_text screen_text"></p>
-      </div>
-
-      <div id="scaleline"></div>
-
-      <div id="info">
-        <a id="info_link" target="_blank" href="info.html?topic=basemap&type=basemap"><i class="fa fa-info-circle menu_info"></i></a>
-        <span id="ldeo_label" class="screen_text">&nbsp;LDEO - Columbia University</span>
-      </div>
-
-      <div id="opacity" hidden>      
-        <input id="opacity_slider" type="range" min="0" max="1" step="0.1" value="1">
-      </div>
-
-      <div id="sequence" hidden>
-        <i id="sequence_left" class="fa fa-chevron-circle-left fa-2x disabled"></i>
-        <i id="sequence_right" class="fa fa-chevron-circle-right fa-2x"></i>
-        <p id="sequence_level"></p>
-      </div>
-
-      <div id="popup" hidden>
-        <div id="popupheader" class="window-header"></div>
-        <div id="popupbody">
-          <p id="popup_text"><br/><br/></p>
+        <div id="icons">
+          <button id="menu_btn" hidden><i class="fa fa-bars fa-2x"></i></button>
         </div>
-        <div id="popupfooter" class="window-footer">
-          <button id="close_btn" class="popup_btn">Close</button>
-          <button id="audio_btn" class="audio_btn">Audio</button>
-          <button id="silent_btn" class="silent_btn">Silent</button>
-          <audio id="popup_audio" type="audio/mpeg">Your browser does not support audio.</audio>
+
+        <div id="layer_header">
+          <p id="layer_title" class="layer_header_text screen_text"></p>
+          <p id="layer_credit" class="layer_header_text screen_text"></p>
         </div>
-      </div>
 
-      <div id="settings" hidden>
-        <div id="settingsheader" class="window-header">Settings</div>
-        <div id="settingsbody">
-          <table class="settings-table">
-            <tr>
-              <td>Scale Bar:</td>
-              <td align="center">
-                <label class="switch">
-                  <input id="scalebar_switch" type="checkbox" checked>
-                  <span class="slider round"></span>
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>Legend:</td>
-              <td align="center">
-                <label class="switch">
-                  <input id="legend_switch" type="checkbox" checked>
-                  <span class="slider round"></span>
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>Place Names:</td>
-              <td align="center">
-                <label class="switch">
-                  <input id="place_names_switch" type="checkbox" checked>
-                  <span class="slider round"></span>
-                </label>
-              </td>
-            </tr>
-            <tr class="disabled">
-              <td>Location:</td>
-              <td align="center">
-                <label class="switch">
-                  <input id="location_switch" type="checkbox" disabled>
-                  <span class="slider round"></span>
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>Show RGB:</td>
-              <td align="center">
-                <label class="switch">
-                  <input id="rgb_switch" type="checkbox">
-                  <span class="slider round"></span>
-                </label>
-              </td>
-            </tr>
-          </table>
+        <div id="scaleline"></div>
+
+        <div id="info">
+          <a id="info_link" target="_blank" href="info.html?topic=basemap&type=basemap"><i class="fa fa-info-circle menu_info"></i></a>
+          <span id="ldeo_label" class="screen_text">&nbsp;LDEO - Columbia University</span>
         </div>
-        <p id="settings_msgs"></p>
-        <div id="settingsfooter" class="window-footer">
-          <button id="close_settings_btn" class="popup_btn">Close</button>
+
+        <div id="opacity" hidden>      
+          <input id="opacity_slider" type="range" min="0" max="1" step="0.1" value="1">
         </div>
+
+        <div id="sequence" hidden>
+          <i id="sequence_left" class="fa fa-chevron-circle-left fa-2x disabled"></i>
+          <i id="sequence_right" class="fa fa-chevron-circle-right fa-2x"></i>
+          <p id="sequence_level"></p>
+        </div>
+
+        <div id="settings" hidden>
+          <div id="settingsheader" class="window-header">Settings</div>
+          <div id="settingsbody">
+            <table class="settings-table">
+              <tr>
+                <td>Scale Bar:</td>
+                <td align="center">
+                  <label class="switch">
+                    <input id="scalebar_switch" type="checkbox" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>Legend:</td>
+                <td align="center">
+                  <label class="switch">
+                    <input id="legend_switch" type="checkbox" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>Place Names:</td>
+                <td align="center">
+                  <label class="switch">
+                    <input id="place_names_switch" type="checkbox" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </td>
+              </tr>
+              <tr class="disabled">
+                <td>Location:</td>
+                <td align="center">
+                  <label class="switch">
+                    <input id="location_switch" type="checkbox" disabled>
+                    <span class="slider round"></span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>Show RGB:</td>
+                <td align="center">
+                  <label class="switch">
+                    <input id="rgb_switch" type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <p id="settings_msgs"></p>
+          <div id="settingsfooter" class="window-footer">
+            <button id="close_settings_btn" class="popup_btn">Close</button>
+          </div>
+        </div>
+
+        <div id="legend" hidden>
+          <div id="legendheader">Legend</div>
+          <img id="legend_img">
+        </div>
+
+      </div> <!-- map -->
+
+      <div id="table-popup" class="ol-popup">
+        <a href="#" id="table-popup-closer" class="ol-popup-closer"><i class="fa fa-times"></i></a>
+        <div id="table-popup-content"></div>
       </div>
 
-      <div id="legend" hidden>
-        <div id="legendheader">Legend</div>
-        <img id="legend_img">
-      </div>
+      <div class="back">
+        <div id="menu" class="menu ">
+          <div id="menuheader" class="window-header">Choose a topic</div>
+          <div id="menubody">
+            <table id="menu_list"></table>
+          </div>
+          <div id="menufooter" class="window-footer">
+            <button title="Go back to previous menu" id="back_btn" class="btn" >Back</button>
+            <button title="Settings" id="settings_btn"><i class="fa fa-cog fa-2x"></i></button>
+            <button title="Take Screenshot" id="screenshot_btn"><i class="fa fa-camera fa-2x"></i></button>
+            <button title="Tutorial" id="tutorial_btn" onclick="window.open('tutorial.html')"><i class="fas fa-chalkboard-teacher fa-2x"></i></button>
+            <button title="Hide this window" id="hide_btn" class="btn">Hide</button>
+          </div>
+        </div>
 
-    </div>
-    <div id="table-popup" class="ol-popup">
-      <a href="#" id="table-popup-closer" class="ol-popup-closer"><i class="fa fa-times"></i></a>
-      <div id="table-popup-content"></div>
-    </div>
+        <div id="popup" class="popup  back2" hidden>
+          <div id="popupheader" class="window-header"></div>
+          <div id="popupbody">
+            <p id="popup_text"><br/><br/></p>
+          </div>
+          <div id="popupfooter" class="window-footer">
+            <button id="close_btn" class="popup_btn">Close</button>
+            <button id="audio_btn" class="audio_btn">Audio</button>
+            <button id="silent_btn" class="silent_btn">Silent</button>
+            <audio id="popup_audio" type="audio/mpeg">Your browser does not support audio.</audio>
+          </div>
+        </div>
 
-    <div id="menu" class="menu back">
+      </div> <!-- back -->
+    </div> <!-- flipper -->
 
-      <div id="menuheader" class="window-header">Choose a topic</div>
-      <div id="menubody">
-        <table id="menu_list"></table>
-      </div>
-      <div id="menufooter" class="window-footer">
-        <button title="Go back to previous menu" id="back_btn" class="btn" >Back</button>
-        <button title="Settings" id="settings_btn"><i class="fa fa-cog fa-2x"></i></button>
-        <button title="Take Screenshot" id="screenshot_btn"><i class="fa fa-camera fa-2x"></i></button>
-        <button title="Tutorial" id="tutorial_btn" onclick="window.open('tutorial.html')"><i class="fas fa-chalkboard-teacher fa-2x"></i></button>
-        <button title="Hide this window" id="hide_btn" class="btn">Hide</button>
-      </div>
-    </div>
-
-  </div>
-</div>
+  </div> <!-- wrapper -->
 
 </body>
 </html>

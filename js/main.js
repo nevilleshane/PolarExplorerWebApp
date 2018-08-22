@@ -144,23 +144,39 @@ $(document).ready(function() {
   //display place names
   displayPlaceNameFeatures();
 
+  /*
+    If user clicks on elevation text, send the coords to the mapClick function
+  */
+  $("#elev").click(function(evt) {
+    var x = evt.clientX;
+    var y = evt.clientY;
+    mapClick(x, y, evt);
+  });
 
   /*
     Handle what happens if the user clicks on the map
   */
   map.on('click', function(evt) {
+    var x = evt.pixel[0];
+    var y = evt.pixel[1];
+    mapClick(x, y, evt);
+  });
+
+  function mapClick(x, y, evt) {
+
     $("#new_user_btn").hide();
     $("#elev").text("");
     $("#elev_triangle").hide();
-    var x = evt.pixel[0];
-    var y = evt.pixel[1];
 
     //first check if clicking on a circle in a table layer (and not a placeName)
-    var feature = map.forEachFeatureAtPixel(evt.pixel, 
-      function(feature, layer) {
-        if (layer.get('title') == "placeNamesLayer") return; 
-        return feature;
-      }, {"hitTolerance":7});
+    var feature;
+    if (evt.pixel) {
+      feature = map.forEachFeatureAtPixel(evt.pixel, 
+        function(feature, layer) {
+          if (layer.get('title') == "placeNamesLayer") return; 
+          return feature;
+        }, {"hitTolerance":7});
+    }
     if (feature) {
         //ignore placename label features
         if (typeof feature.fontName != "undefined") return; 
@@ -225,7 +241,6 @@ $(document).ready(function() {
       $("#elev_triangle").css({top:y-8+"px", left:x-8+"px"}).show();
 
     } else if (showElevation) {
-
       var coord = map.getCoordinateFromPixel([x,y]);
       var ll = ol.proj.toLonLat(coord, map.getView().getProjection());
       //check that we are not out of the map view extent
@@ -272,7 +287,7 @@ $(document).ready(function() {
 
       }
     }
-  });
+  }
 
   //Make the DIV element draggagle:
   if (!isMobile) {

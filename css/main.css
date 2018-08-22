@@ -117,7 +117,7 @@ tr {
   color: blue;
 }
 
-#popup {
+.popup {
   background: #f1f1f1;
   border: 2px solid #d3d3d3;
   position: absolute;
@@ -483,7 +483,7 @@ button {
   }
 
 
-  #popup {
+  .popup {
     border-radius: 10px;
     height: 95%;
     bottom: 2px;
@@ -605,11 +605,13 @@ button {
   /* hide back of pane during swap */
   .front, .back {
     backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
   }
 
   /* front pane, placed above back */
   .front {
-    z-index: 2;
+    z-index: 3;
     /* for firefox 31 */
     transform: rotateY(0deg);
   }
@@ -620,14 +622,7 @@ button {
     transform: rotateY(180deg);
   }
 
-
-
-
 }
-
-
-
- 
 
 
 /* smart phone landscape */
@@ -662,7 +657,7 @@ button {
   }
 
 
-  #popup {
+  .popup {
     border-radius: 10px;
     height: 95%;
     bottom: 2px;
@@ -777,7 +772,7 @@ button {
     transform: translateX(20px);
   }
 
-  /*
+/*
     used to flip between menu and map on mobile devices
   */
   /* flip the pane when added or removed */
@@ -806,11 +801,13 @@ button {
   /* hide back of pane during swap */
   .front, .back {
     backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
   }
 
   /* front pane, placed above back */
   .front {
-    z-index: 2;
+    z-index: 3;
     /* for firefox 31 */
     transform: rotateY(0deg);
   }
@@ -854,7 +851,7 @@ button {
     padding: 10px 0 10px 10px;
   }
 
-  #popup {
+  .popup {
     font-size: 70%;
     min-width: 0;
     width: 20%;
@@ -938,7 +935,7 @@ button {
     margin-right: 1px;
   }
 
-  #popup {
+  .popup {
     font-size: 70%;
     width: 34%;
     height: 40%;
@@ -1061,7 +1058,7 @@ button {
     padding: 10px 0 10px 10px;
   }
 
-  #popup {
+  .popup {
     font-size: 80%;
   }
 
@@ -1129,7 +1126,7 @@ button {
     margin-right: 1px;
   }
 
-  #popup {
+  .popup {
     font-size: 80%;
     width: 33%;
     height: 40%;

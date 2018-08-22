@@ -10,7 +10,6 @@ function MapClient(view, params) {
   });
   this.map = map;
 
-  isMobile = mobilecheck();
   mobileZoomAdjust = 0;
   if (isMobile) {
     mobileZoomAdjust = 0.5;
@@ -58,6 +57,7 @@ mobilecheck = function() {
 
 
 $(document).ready(function() {
+  isMobile = mobilecheck();
   //set up projections
   //SP
   proj4.defs('EPSG:3031', '+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs');
@@ -128,8 +128,6 @@ $(document).ready(function() {
   map.on('movestart', function(evt) {
     $("#elev").text("");
     $("#elev_triangle").hide();
-    //hide the hidden map whilst moving as it so the user doesn't see it
-    $("#hidden_map").hide();
   });
 
   /*
@@ -141,7 +139,6 @@ $(document).ready(function() {
     //make sure hidden map stays aligned with visible map
     map2.getView().setZoom(map.getView().getZoom());
     map2.getView().setCenter(map.getView().getCenter());
-    $("#hidden_map").show();
     //console.log("zoom level: " + map.getView().getZoom() + "("+Math.pow(2,map.getView().getZoom()-1)+") " + map.getView().getResolution());
   });
 
