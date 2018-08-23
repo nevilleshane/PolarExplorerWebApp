@@ -32,14 +32,15 @@
     <div class="flipper">
       <div id="map" class="map-div front">
 
-  <!--     <h1 class="mobile_portrait">mobile portrait</h1>
+      <h1 class="mobile_portrait">mobile portrait</h1>
       <h1 class="mobile_landscape">mobile landscape</h1>
       <h1 class="tablet_portrait">tablet portrait</h1>
       <h1 class="tablet_landscape">tablet landscape</h1>
       <h1 class="small_tablet_portrait">small tablet portrait</h1>
-      <h1 class="small_tablet_landscape">small tablet landscape</h1> -->
-
-        <button class="btn" id="new_user_btn" onclick="window.open('tutorial.html')">New User?</button>
+      <h1 class="small_tablet_landscape">small tablet landscape</h1>
+        <div class="new_user_btn-container">
+          <button class="btn" id="new_user_btn" onclick="window.open('tutorial.html')">New User?</button>
+        </div>
 
         <p id="elev" class="screen_text"></p>
         <div id="elev_triangle" class="triangle" hidden></div>
@@ -70,67 +71,13 @@
           <p id="sequence_level"></p>
         </div>
 
-        <div id="settings" hidden>
-          <div id="settingsheader" class="window-header">Settings</div>
-          <div id="settingsbody">
-            <table class="settings-table">
-              <tr>
-                <td>Scale Bar:</td>
-                <td align="center">
-                  <label class="switch">
-                    <input id="scalebar_switch" type="checkbox" checked>
-                    <span class="slider round"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td>Legend:</td>
-                <td align="center">
-                  <label class="switch">
-                    <input id="legend_switch" type="checkbox" checked>
-                    <span class="slider round"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td>Place Names:</td>
-                <td align="center">
-                  <label class="switch">
-                    <input id="place_names_switch" type="checkbox" checked>
-                    <span class="slider round"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr class="disabled">
-                <td>Location:</td>
-                <td align="center">
-                  <label class="switch">
-                    <input id="location_switch" type="checkbox" disabled>
-                    <span class="slider round"></span>
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td>Show RGB:</td>
-                <td align="center">
-                  <label class="switch">
-                    <input id="rgb_switch" type="checkbox">
-                    <span class="slider round"></span>
-                  </label>
-                </td>
-              </tr>
-            </table>
-          </div>
-          <p id="settings_msgs"></p>
-          <div id="settingsfooter" class="window-footer">
-            <button id="close_settings_btn" class="popup_btn">Close</button>
-          </div>
-        </div>
-
+        
         <div id="legend" hidden>
           <div id="legendheader">Legend</div>
           <img id="legend_img">
         </div>
+
+
 
       </div> <!-- map -->
 
@@ -140,13 +87,14 @@
       </div>
 
       <div class="back">
-        <div id="menu" class="menu ">
+
+        <div id="menu" class="menu">
           <div id="menuheader" class="window-header">Choose a topic</div>
           <div id="menubody">
             <table id="menu_list"></table>
           </div>
           <div id="menufooter" class="window-footer">
-            <button title="Go back to previous menu" id="back_btn" class="btn" >Back</button>
+            <button title="Go back to previous menu" id="back_btn" class="btn">Back</button>
             <button title="Settings" id="settings_btn"><i class="fa fa-cog fa-2x"></i></button>
             <button title="Take Screenshot" id="screenshot_btn"><i class="fa fa-camera fa-2x"></i></button>
             <button title="Tutorial" id="tutorial_btn" onclick="window.open('tutorial.html')"><i class="fas fa-chalkboard-teacher fa-2x"></i></button>
@@ -154,7 +102,7 @@
           </div>
         </div>
 
-        <div id="popup" class="popup  back2" hidden>
+        <div id="popup" class="popup" hidden>
           <div id="popupheader" class="window-header"></div>
           <div id="popupbody">
             <p id="popup_text"><br/><br/></p>
@@ -166,6 +114,68 @@
             <audio id="popup_audio" type="audio/mpeg">Your browser does not support audio.</audio>
           </div>
         </div>
+
+        <div class="settings-container" hidden>
+          <div id="settings" class="settings" >
+            <div id="settingsheader" class="window-header">Settings</div>
+            <div id="settingsbody">
+              <table class="settings-table">
+                <tr>
+                  <td>Scale Bar:</td>
+                  <td align="center">
+                    <label class="switch">
+                      <input id="scalebar_switch" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Legend:</td>
+                  <td align="center">
+                    <label class="switch">
+                      <input id="legend_switch" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Place Names:</td>
+                  <td align="center">
+                    <label class="switch">
+                      <input id="place_names_switch" type="checkbox" checked>
+                      <span class="slider round"></span>
+                    </label>
+                  </td>
+                </tr>
+                <tr class="disabled">
+                  <td>Location:</td>
+                  <td align="center">
+                    <label class="switch">
+                      <input id="location_switch" type="checkbox" disabled>
+                      <span class="slider round"></span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Show RGB:</td>
+                  <td align="center">
+                    <label class="switch">
+                      <input id="rgb_switch" type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <p id="settings_msgs"></p>
+            <div id="settingsfooter" class="window-footer">
+              <button id="close_settings_btn" class="popup_btn">Close</button>
+            </div>
+          </div>
+        </div>
+
+
+
 
       </div> <!-- back -->
     </div> <!-- flipper -->

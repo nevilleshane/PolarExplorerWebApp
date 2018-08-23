@@ -74,14 +74,14 @@ $(document).ready(function() {
     Display the settings menu when the settings button is clicked
   */
   $("#settings_btn").click(function() {
-    $("#settings").show();
+    $(".settings-container").show("slide", {direction: "down"}, 800);
   });
 
   /*
     Close the settings menu when the close settings button is clicked
   */
   $("#close_settings_btn").click(function() {
-    $("#settings").hide();
+    $(".settings-container").hide("slide", {direction: "down"}, 800);
   });
 
   /*
@@ -164,7 +164,7 @@ $(document).ready(function() {
 
   function mapClick(x, y, evt) {
 
-    $("#new_user_btn").hide();
+    $(".new_user_btn-container").hide("slide", {direction: "down"}, 1500);
     $("#elev").text("");
     $("#elev_triangle").hide();
 
@@ -393,15 +393,15 @@ function menuItemClicked(overlay, parent, icon, title) {
       //repopulate menu with childrem of this item
       populateMenu(overlay.children, overlay.name);
 
-      $("#menuheader").hide().show("slide", { direction: "right" }, 500);
-      $("#menubody").hide().show("slide", { direction: "right" }, 500);
+      $("#menuheader").hide().show("slide", {direction: "right"}, 500);
+      $("#menubody").hide().show("slide", {direction: "right"}, 500);
 
           
       $("#back_btn").unbind('click').click(function() {
         //repopulate menu with parent
         populateMenu(parents.pop(), parent_titles.pop());
-        $("#menuheader").hide().show("slide", { direction: "left" }, 500);
-        $("#menubody").hide().show("slide", { direction: "left" }, 500);
+        $("#menuheader").hide().show("slide", {direction: "left"}, 500);
+        $("#menubody").hide().show("slide", {direction: "left"}, 500);
       });
       break;
     case "tile_512":
@@ -516,7 +516,7 @@ function showPopup(overlay) {
     success: function(response) {
       var text = response.replace(/â/g, "'").split(":");
       $("#popupheader").text(overlay.name);
-      $("#popup_text").text(text[1]).append(text[1] + "<br/><br/>");
+      $("#popup_text").text(text[1]).append(text[1] + "<br/><br/>").scrollTop(0);
 
       //play the audio
       if (overlay.aboutAudioURL) {
@@ -530,7 +530,7 @@ function showPopup(overlay) {
           }
         });
       }
-      $("#popup").show("fade",{},1000);
+      $("#popup").show("fade");
       if (isMobile) {
         $("#menu").addClass("disabled");
         $("#menufooter").addClass("disabled");
@@ -643,7 +643,7 @@ function setSlider(layer, overlay) {
 function displayLayer(layer, overlay, removeOldLayers) {
   
   //hide new user button
-  $("#new_user_btn").hide();
+  $(".new_user_btn-container").hide("slide", {direction: "down"}, 1500);
 
   //determine whether place names should be shown
   showSeabedNames = overlay.showSeabedNames;

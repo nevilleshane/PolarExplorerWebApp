@@ -70,17 +70,23 @@ html, body {
   font-family: arial;
   height: 55%;
   right: 3%;
-  padding: 0.5em;
+  padding: 5px;
   width: 23%;
   z-index: 70;
+  -moz-box-shadow: 0 2px 7px #292929;
+  -webkit-box-shadow: 0 2px 7px #292929;
+  box-shadow: 0 2px 7px #292929;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 
 #menubody {
-  position: absolute;
-  height: 75%;
-  width: 95%;
+  height: 76%;
+  width: 100%;
   overflow: auto; 
 }
+
 table {
   width: 100%;
 }
@@ -132,6 +138,12 @@ tr {
   resize: both;
   min-height:42%;
   min-width:24%;
+  -moz-box-shadow: 0 2px 7px #292929;
+  -webkit-box-shadow: 0 2px 7px #292929;
+  box-shadow: 0 2px 7px #292929;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 
 #popup_text {
@@ -144,17 +156,31 @@ tr {
   margin-bottom: 0;
 }
 
-#settings {
+.settings-container {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.settings {
   background: #bfbfbf;
   border: 2px solid #d3d3d3;
   bottom: 35%;
   position: absolute;
   font-family: arial;
-  height: 42%;
+  height: 330px;
+
   left: 40%;
   padding: 0.5em;
   width: 23%;
   z-index: 90;
+  -moz-box-shadow: 0 2px 7px #292929;
+  -webkit-box-shadow: 0 2px 7px #292929;
+  box-shadow: 0 2px 7px #292929;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 
 #settingsbody {
@@ -174,20 +200,32 @@ tr {
 }
 
 .window-header {
-    padding: 10px;
-    cursor: move;
-    background-color:  #071d3f;
-    color: #fff;
+  padding: 10px;
+  cursor: move;
+  background-color:  #071d3f;
+  color: #fff;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .window-footer {
-    bottom: 0;
-    position: absolute;
-    padding: 10px;
-    cursor: move;
-    background-color: #071d3f;
-    color: #fff;
-    width: 90%;
+  bottom: 1%;
+  position: absolute;
+  width: 96%;
+  padding: 3% 0 3% 0;
+  background-color: #071d3f;
+  color: #fff;
+  text-align: center;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 #info {
@@ -285,7 +323,6 @@ tr.disabled {
   color:white;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
-
 
 .ol-control button {
   z-index: 30;
@@ -420,6 +457,13 @@ input:checked + .slider:before {
   color: #eeeeee;
 }
 
+.new_user_btn-container {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+
 #new_user_btn {
   background-color: #071d3f;
   border: none;
@@ -442,13 +486,14 @@ button {
   -moz-appearance: none;
   -webkit-appearance: none;
   background-color: #f1f1f1;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  margin-left: 3px;
-  margin-right: 3px;
+  padding: 3px 1px 3px 1px;
+  margin-left: 2px;
+  margin-right: 2px;
   font-size: 75%;
   font-family: arial;
   font-weight: bold;
+  width: 15%;
+  text-align: center;
 }
 
 
@@ -550,7 +595,7 @@ button {
     left: 0.2em;
   }
 
-  #settings {
+  .settings {
     height: 100%;
     left: 0;
     bottom: 0;
@@ -727,7 +772,7 @@ button {
     left: 25%;
   }
 
-  #settings {
+  .settings {
     height: 100%;
     left: 0;
     bottom: 0;
@@ -860,7 +905,7 @@ button {
     left: 1.5%;
   }
 
-  #settings {
+  .settings {
     font-size: 70%;
     height: 55%;
     width: 20%;
@@ -952,7 +997,7 @@ button {
     padding: 10px 0 10px 10px;
   }
 
-  #settings {
+  .settings {
     font-size: 80%;
     height: 30%;
     width: 35%;
@@ -1062,7 +1107,7 @@ button {
     font-size: 80%;
   }
 
-  #settings {
+  .settings {
     font-size: 80%
   }
 
@@ -1143,7 +1188,7 @@ button {
     padding: 10px 0 10px 10px;
   }
 
-  #settings {
+  .settings {
     font-size: 80%;
     height: 30%;
     width: 35%;
