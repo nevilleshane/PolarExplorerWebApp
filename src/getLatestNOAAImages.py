@@ -22,9 +22,9 @@ import sys
 import os
 
 root_dir = sys.argv[1]
-json_file = os.path.join(root_dir, "mapOverlays.json")
+json_file = os.path.join(root_dir, "js/mapOverlays.json")
 out = {}
-output_file = os.path.join(root_dir, "noaaSourcePaths.json")
+output_file = os.path.join(root_dir, "js/noaaSourcePaths.json")
 
 #read the the json file to find any Request Source Path urls
 with open(json_file) as f:
