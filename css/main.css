@@ -425,6 +425,8 @@ input:focus + .slider {
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
+  -moz-transform: translateX(26px);
+  -o-transform: translateX(26px);
   transform: translateX(26px);
 }
 
@@ -503,19 +505,31 @@ button {
     display: block;
   }
 
+  button {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: auto;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
   .window-header {
-    width: 97.5%;
+    width: 99%;
     padding: 10px 0 10px 10px;
+    border-radius: 0;
   }
 
   .window-footer {
-    width: 97.5%;
+    width: 99%;
     padding: 10px 0 10px 10px;
+    bottom: 0;
+    border-radius: 0;
   }
 
   .menu {
     bottom: 0;
     border-color: black;
+    border-radius: 0;
     height: 100%;
     right: 0;
     padding: 0;
@@ -523,10 +537,9 @@ button {
   }
 
   #menubody {
-    height: 75%;
+    height: 82%;
     width: 100%;
   }
-
 
   .popup {
     border-radius: 10px;
@@ -541,7 +554,12 @@ button {
     overflow: hidden;  
     resize: none;
     border-color: blue
+  }
 
+  #popup_text {
+    height: 82%;
+    line-height: 1.5em;
+    margin: 0;
   }
 
   #info {
@@ -616,20 +634,23 @@ button {
     margin-top: 14px;
   }
 
-  #popup_text {
-    line-height: 1.5em;
-    margin: 0;
-  }
-
   /*
     used to flip between menu and map on mobile devices
   */
   /* flip the pane when added or removed */
   .flip {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
     transform: rotateY(180deg);
   }
 
   .flip-container {
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    -ms-perspective: 1000px;
+    -o-perspective: 1000px;
     perspective: 1000px;
     position: absolute;
     bottom: 0;
@@ -640,7 +661,14 @@ button {
 
   /* flip speed goes here */
   .flipper {
+    -webkit-transition: 1s;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
     transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
     transform-style: preserve-3d;
     width: 100%;
     height: 100%;
@@ -649,6 +677,10 @@ button {
 
   /* hide back of pane during swap */
   .front, .back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
     backface-visibility: hidden;
     width: 100%;
     height: 100%;
@@ -657,16 +689,22 @@ button {
   /* front pane, placed above back */
   .front {
     z-index: 3;
-    /* for firefox 31 */
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
     transform: rotateY(0deg);
   }
 
   /* back, initially hidden pane */
   .back {
     z-index: 1;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
     transform: rotateY(180deg);
   }
-
 }
 
 
@@ -676,20 +714,31 @@ button {
     display: block;
   }
   
-
- .window-header {
-    width: 98.5%;
-    padding: 5px 0 5px 10px;
+  button {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: auto;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  .window-header {
+    width: 100%;
+    padding: 5px 0 5px 5px;
+    border-radius: 0;
   }
 
   .window-footer {
-    width: 98.5%;
-    padding: 5px 0 5px 10px;
+    width: 100%;
+    padding: 5px 0 5px 5px;
+    bottom: 0;
+    border-radius: 0;
   }
 
   .menu {
     bottom: 0;
     border-color: black;
+    border-radius: 0;
     height: 100%;
     right: 0;
     padding: 0;
@@ -814,18 +863,28 @@ button {
   input:checked + .slider:before {
     -webkit-transform: translateX(20px);
     -ms-transform: translateX(20px);
+    -moz-transform: translateX(20px);
+    -o-transform: translateX(20px);
     transform: translateX(20px);
   }
 
-/*
+  /*
     used to flip between menu and map on mobile devices
   */
   /* flip the pane when added or removed */
   .flip {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
     transform: rotateY(180deg);
   }
 
   .flip-container {
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    -ms-perspective: 1000px;
+    -o-perspective: 1000px;
     perspective: 1000px;
     position: absolute;
     bottom: 0;
@@ -836,7 +895,14 @@ button {
 
   /* flip speed goes here */
   .flipper {
+    -webkit-transition: 1s;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
     transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
     transform-style: preserve-3d;
     width: 100%;
     height: 100%;
@@ -845,6 +911,10 @@ button {
 
   /* hide back of pane during swap */
   .front, .back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
     backface-visibility: hidden;
     width: 100%;
     height: 100%;
@@ -853,19 +923,24 @@ button {
   /* front pane, placed above back */
   .front {
     z-index: 3;
-    /* for firefox 31 */
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
     transform: rotateY(0deg);
   }
 
   /* back, initially hidden pane */
   .back {
     z-index: 1;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
     transform: rotateY(180deg);
   }
 
-
 }
-
 
 
 
@@ -881,19 +956,14 @@ button {
     right: 1.5%;
   }
 
+  #menubody {
+    height: 70%;
+  }
+
   button {
     font-size: 65%;
     margin-left: 1px;
     margin-right: 1px;
-  }
-
-  .window-header {
-    width: 90%;
-  }
-
-  .window-footer {
-    width: 91%;
-    padding: 10px 0 10px 10px;
   }
 
   .popup {
@@ -903,6 +973,10 @@ button {
     overflow: hidden;  
     resize: none;
     left: 1.5%;
+  }
+
+  #popup_text {
+    height: 68%;
   }
 
   .settings {
@@ -928,6 +1002,8 @@ button {
   input:checked + .slider:before {
     -webkit-transform: translateX(15px);
     -ms-transform: translateX(15px);
+    -moz-transform: translateX(15px);
+    -o-transform: translateX(15px);
     transform: translateX(15px);
   }
 
@@ -976,8 +1052,11 @@ button {
 
   button {
     font-size: 75%;
-    margin-left: 1px;
-    margin-right: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+    width: auto;
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   .popup {
@@ -986,15 +1065,6 @@ button {
     height: 40%;
     bottom: 1%;
     left: 0.5%;
-  }
-
-  .window-header {
-    width: 90%;
-  }
-
-  .window-footer {
-    width: 91%;
-    padding: 10px 0 10px 10px;
   }
 
   .settings {
@@ -1020,6 +1090,8 @@ button {
   input:checked + .slider:before {
     -webkit-transform: translateX(15px);
     -ms-transform: translateX(15px);
+    -moz-transform: translateX(15px);
+    -o-transform: translateX(15px);
     transform: translateX(15px);
   }
 
@@ -1093,14 +1165,9 @@ button {
   }
 
   button {
-    font-size: 65%;
-    margin-left: 1px;
-    margin-right: 1px;
-  }
-
-  .window-footer {
-    width: 91%;
-    padding: 10px 0 10px 10px;
+    font-size: 75%;
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   .popup {
@@ -1108,7 +1175,8 @@ button {
   }
 
   .settings {
-    font-size: 80%
+    font-size: 80%;
+    height: 250px;
   }
 
   .switch {
@@ -1126,6 +1194,8 @@ button {
   input:checked + .slider:before {
     -webkit-transform: translateX(15px);
     -ms-transform: translateX(15px);
+    -moz-transform: translateX(15px);
+    -o-transform: translateX(15px);
     transform: translateX(15px);
   }
 
@@ -1138,7 +1208,7 @@ button {
   }
 
   #new_user_btn {
-    left: 45.5%;
+    left: 43.5%;
     bottom: 13%;
   }
 
@@ -1165,10 +1235,14 @@ button {
     right: 1%;
   }
 
+  #menubody {
+    height: 80%;
+  }
+
   button {
-    font-size: 75%;
-    margin-left: 1px;
-    margin-right: 1px;
+    font-size: 80%;
+    margin-left: 3px;
+    margin-right: 3px;
   }
 
   .popup {
@@ -1177,15 +1251,6 @@ button {
     height: 40%;
     bottom: 1%;
     left: 1%;
-  }
-
-  .window-header {
-    width: 92%;
-  }
-
-  .window-footer {
-    width: 91%;
-    padding: 10px 0 10px 10px;
   }
 
   .settings {
@@ -1212,6 +1277,8 @@ button {
   input:checked + .slider:before {
     -webkit-transform: translateX(15px);
     -ms-transform: translateX(15px);
+    -moz-transform: translateX(15px);
+    -o-transform: translateX(15px);
     transform: translateX(15px);
   }
 
@@ -1224,7 +1291,7 @@ button {
   }
 
   #new_user_btn {
-    left: 45.5%;
+    left: 44%;
     bottom: 13%;
   }
 
