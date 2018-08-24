@@ -68,7 +68,8 @@ $(document).ready(function() {
     link.href = image; 
     link.download = 'PolarExplorer_snapshot.jpg';
     document.body.appendChild(link);
-    link.click();  
+    link.click();
+    link.remove();  
   });
 
   /*
