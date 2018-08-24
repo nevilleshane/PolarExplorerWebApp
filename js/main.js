@@ -64,12 +64,10 @@ $(document).ready(function() {
     var canvas = $("#map").find("canvas")[0];
     var image = canvas.toDataURL("image/jpeg");
     var link = document.createElement("a");
-    link.setAttribute("type", "hidden"); 
     link.href = image; 
     link.download = 'PolarExplorer_snapshot.jpg';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();  
+    link.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
+
   });
 
   /*
