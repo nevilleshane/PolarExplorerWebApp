@@ -498,7 +498,7 @@ function displayNOAA(overlay, removeOldLayers, sequence) {
     url = "https://gis.nnvl.noaa.gov/arcgis/rest/services/" + split[5] + "/" + productName + "/ImageServer/";
     return {url: url, imageName: imageName};
   }
-  
+
   function getLayer(tileUrl) {
     var urlAndImageName = getUrlAndImageName(tileUrl);
     console.log(urlAndImageName);

@@ -12,7 +12,6 @@ html, body {
   z-index: 50;
 }
 
-
 .wrapper {
   position: relative;
   height: 100%;
@@ -57,9 +56,14 @@ html, body {
 
 #icons {
   bottom: 0;
-  right: 3em;
+  right: 3%;
   position: absolute;
   z-index: 60;
+}
+
+#icons button {
+  width: auto;
+  padding: 5px 8px 5px 8px;
 }
 
 .menu {
@@ -960,6 +964,10 @@ button {
     height: 70%;
   }
 
+  #icons {
+    right: 1.5%;
+  }
+
   button {
     font-size: 65%;
     margin-left: 1px;
@@ -1047,6 +1055,10 @@ button {
     font-size: 70%;
     height: 45%;
     width: 34%; 
+    right: 0.5%;
+  }
+
+  #icons {
     right: 0.5%;
   }
 
@@ -1232,6 +1244,10 @@ button {
     font-size: 80%;
     height: 45%;
     width: 33%; 
+    right: 1%;
+  }
+
+ #icons {
     right: 1%;
   }
 
