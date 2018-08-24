@@ -61,13 +61,14 @@ $(document).ready(function() {
     (can't use png as some canvases are too large) 
   */
   $("#screenshot_btn").click(function() {
-   
     var canvas = $("#map").find("canvas")[0];
     var image = canvas.toDataURL("image/jpeg");
-    var link=document.createElement("a");
-    link.href=image; 
+    var link = document.createElement("a");
+    link.setAttribute("type", "hidden"); 
+    link.href = image; 
     link.download = 'PolarExplorer_snapshot.jpg';
-    link.click();   
+    document.body.appendChild(link);
+    link.click();  
   });
 
   /*
