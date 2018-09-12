@@ -12,7 +12,11 @@ $(document).ready(function() {
   */
   $("#menu_btn").click(function() {
       if (isMobile) {
-        $('.flipper').addClass('flip'); 
+        $('#hidden_map').hide(); // hide the hidden map during flipping
+        $('.flipper').addClass('flip');
+        setTimeout(function() {
+          $('#hidden_map').show();
+        }, 1000);  
       } else {
         $("#menu").show("slow");
       }
@@ -24,7 +28,11 @@ $(document).ready(function() {
   */
   $("#hide_btn").click(function() {
       if (isMobile) {
-        $('.flipper').removeClass('flip'); 
+        $('#hidden_map').hide(); // hide the hidden map during flipping
+        $('.flipper').removeClass('flip');
+        setTimeout(function() {
+          $('#hidden_map').show();
+        }, 1000);
       } else {
         $("#menu").hide("slow");
       }
@@ -51,7 +59,11 @@ $(document).ready(function() {
     if (isMobile) {
       $("#popup").hide();
       $("#menu").removeClass("disabled");
-      $('.flipper').removeClass('flip'); 
+      $('#hidden_map').hide(); // hide the hidden map during flipping
+      $('.flipper').removeClass('flip');
+      setTimeout(function() {
+        $('#hidden_map').show();
+      }, 1000);
       $("#menu_btn").show();
     }
   });
@@ -287,6 +299,7 @@ $(document).ready(function() {
 
       }
     }
+    // $("#hidden_map").hide();
   }
 
   //Make the DIV element draggagle:
@@ -525,7 +538,11 @@ function showPopup(overlay) {
           if (isMobile) {
             $("#popup").hide();
             $("#menu").removeClass("disabled");
-            $('.flipper').removeClass('flip'); 
+            $('#hidden_map').hide(); // hide the hidden map during flipping
+            $('.flipper').removeClass('flip');
+            setTimeout(function() {
+              $('#hidden_map').show();
+            }, 1000); 
             $("#menu_btn").show();
           }
         });
