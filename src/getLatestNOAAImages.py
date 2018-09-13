@@ -23,16 +23,16 @@ import os
 try:
     import boto3
 except:
-    print("ERROR: Unable to import boto3.  Check that ~/.aws/configuration is present and correct.")
+    print("ERROR: Unable to import boto3.")
     sys.exit(0)
- 
-BUCKET_NAME = "www.earth-observer.org"
-S3_FILE_NAME = "data/web_pages/webapp/js/noaaSourcePaths.json"
 
 root_dir = sys.argv[1]
-json_file = os.path.join(root_dir, "js/mapOverlays.json")
+json_file = os.path.join(root_dir, "mapOverlays.json")
 out = {}
-output_file = os.path.join(root_dir, "js/noaaSourcePaths.json")
+output_file = os.path.join(root_dir, "noaaSourcePaths.json")
+
+S3_FILE_NAME = "js/noaaSourcePaths.json"
+aws_settings = json.loads(open(os.path.join(root_dir, "aws_config.json"), 'r').read())
 
 #read the the json file to find any Request Source Path urls
 with open(json_file) as f:
@@ -67,8 +67,11 @@ except:
 
 # upload to AWS S3
 try:
-    s3 = boto3.client('s3')
-    s3.upload_file(output_file, BUCKET_NAME, S3_FILE_NAME, ExtraArgs={'ACL': 'public-read'})
+    s3 = boto3.client('s3',
+                      aws_access_key_id=aws_settings['AWS_ACCESS_KEY_ID'],
+                      aws_secret_access_key=aws_settings['AWS_SECRET_ACCESS_KEY']
+                      )
+    s3.upload_file(output_file, aws_settings['S3_BUCKET_NAME'], S3_FILE_NAME, ExtraArgs={'ACL': 'public-read'})
 except:
     print("ERROR: unable to upload file %s to AWS S3" % S3_FILE_NAME)
     print(sys.exc_info()[1])
