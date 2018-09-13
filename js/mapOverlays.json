@@ -361,7 +361,7 @@ var mapOverlays =
                   "iPhoneLegend":true,
                   "cache":false,
                   "scale":true,
-                  "scalePath":"http://app.polar-observer.org/data/basemaps/images/global/monthly_extras/NetRadiation_512.scl",
+                  "scalePath":"http://app.earth-observer.org/data/basemaps/images/global/monthly_extras/NetRadiation_512.scl",
                   "aboutAlertURL":"http://app.earth-observer.org/data/about/About_EarthsNetRadiation.txt",
                   "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_EarthsNetRadiation.m4a"
                },
