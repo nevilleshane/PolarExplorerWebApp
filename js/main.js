@@ -529,7 +529,7 @@ function showPopup(overlay) {
     success: function(response) {
       var text = response.replace(/â/g, "'").split(":");
       $("#popupheader").text(overlay.name);
-      $("#popup_text").text(text[1]).append(text[1] + "<br/><br/>").scrollTop(0);
+      $("#popup_text").text(text[1]).append("<br/><br/>").scrollTop(0);
 
       //play the audio
       if (overlay.aboutAudioURL) {
