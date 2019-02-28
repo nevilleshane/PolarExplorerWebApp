@@ -2957,8 +2957,8 @@ var mapOverlays =
                   ]
                },
                {
-                  "name":"Surge heights with hurricane catagory",
-                  "title":"Surge Heights With Hurricane Catagory",
+                  "name":"Surge heights with hurricane category",
+                  "title":"Surge Heights With Hurricane Category",
                   "type":"multi_layer",
                   "showPlaceNames":false,
                   "showElevation":false,
@@ -2993,8 +2993,8 @@ var mapOverlays =
                         "listOrder":"1,4,5,6,8,10,11",
                         "listUnits":"NULL,NULL,NULL,NULL,ft,NULL,NULL",
                         "clickableLink":"http://en.wikipedia.org/wiki/,12",
-                        "imageColumn":13,
-                        "imageLink":"https://www.stormsurge.noaa.gov/images/tracks/,13"
+                        // "imageColumn":13,
+                        // "imageLink":"https://www.stormsurge.noaa.gov/images/tracks/,13"
                      }
                   ]
                }
