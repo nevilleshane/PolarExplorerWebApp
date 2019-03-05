@@ -535,7 +535,8 @@ var mapOverlays =
                   "iPhoneLegend":true,
                   "scale":true,
                   "aboutAlertURL":"http://app.earth-observer.org/data/about/About_ContributionGreenlandGlaciers.txt",
-                  "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_ContributionGreenlandGlaciers.m4a"
+                  "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_ContributionGreenlandGlaciers.m4a",
+                  "wesn":"-73,-8,34,40"
                },
                {
                   "name":"Jakobshavn glacier retreat 2001-2015",
@@ -574,7 +575,8 @@ var mapOverlays =
                   "scale":true,
                   "scalePath":"http://app.earth-observer.org/data/basemaps/images/arctic/AlaskaGlacierMelting_320/SE_AlaskaGlacierMelting_Legend.scl",
                   "aboutAlertURL":"http://app.earth-observer.org/data/about/About_AlaskanGlacierMassLoss.txt",
-                  "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_AlaskanGlacierMassLoss.m4a"
+                  "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_AlaskanGlacierMassLoss.m4a",
+                  "wesn":"-180,180,0,90"
                },
                {
                   "name":"Changes in Alaska's glaciers (close up)",
@@ -628,7 +630,8 @@ var mapOverlays =
                   "scale":true,
                   "scalePath":"http://app.earth-observer.org/data/basemaps/images/arctic/Greenland/GreenlandElevation_320/GreenlandElevation_320.scl",
                   "aboutAlertURL":"http://app.earth-observer.org/data/about/About_GreenlandIceSheetElevation.txt",
-                  "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_GreenlandIceSheetElevation.m4a"
+                  "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_GreenlandIceSheetElevation.m4a",
+                  "wesn":"-73,-8,34,40"
                },
                {
                   "name":"Elevation change of Greenland Ice Sheet",
@@ -648,7 +651,8 @@ var mapOverlays =
                   "scale":true,
                   "scalePath":"http://app.earth-observer.org/data/basemaps/images/arctic/Greenland/BeaIceThicknessChangeTiles_320/BeaIceThicknessChangeLegend.scl",
                   "aboutAlertURL":"http://app.earth-observer.org/data/about/About_ChangesGreenlandIceSheetElevations.txt",
-                  "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_ChangesGreenlandIceSheetElevations.m4a"
+                  "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_ChangesGreenlandIceSheetElevations.m4a",
+                  "wesn":"-73,-8,34,40"
                },
                {
                   "name":"Antarctic Ice Sheet elevation",
@@ -958,7 +962,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                },
                {
                   "type":"arcgis_tile_256",
@@ -968,7 +972,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                }
             ]
          }
@@ -1002,7 +1006,8 @@ var mapOverlays =
             "scale":true,
             "scalePath":"http://app.earth-observer.org/data/basemaps/images/arctic/Greenland/GreenlandIceSheetThickness_320/GreenlandIceSheetThickness.scl",
             "aboutAlertURL":"http://app.earth-observer.org/data/about/About_GreenlandIceSheetThickness.txt",
-            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_GreenlandIceSheetThickness.m4a"
+            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_GreenlandIceSheetThickness.m4a",
+            "wesn":"-73,-8,34,40"
          },
          {
             "name":"A look under the Greenland Ice Sheet",
@@ -1021,7 +1026,8 @@ var mapOverlays =
             "scale":true,
             "scalePath":"http://app.earth-observer.org/data/basemaps/images/arctic/Greenland/GreenlandBedrockElevation2_320/GreenlandBedrockElevation.scl",
             "aboutAlertURL":"http://app.earth-observer.org/data/about/About_UnderGreenlandIceSheet.txt",
-            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_UnderGreenlandIceSheet.m4a"
+            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_UnderGreenlandIceSheet.m4a",
+            "wesn":"-73,-8,34,40"
          },
          {
             "name":"Annual surface melt Greenland Ice Sheet (1983-2005)",
@@ -1041,7 +1047,8 @@ var mapOverlays =
             "scale":true,
             "scalePath":"http://app.earth-observer.org/data/basemaps/images/arctic/Greenland/GreenlandMeltYears_320/GreenlandMeltYears_320.scl",
             "aboutAlertURL":"http://app.earth-observer.org/data/about/About_SurfaceMeltGreenlandIceSheet.txt",
-            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_SurfacemeltGreenlandIceSheet.m4a"
+            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_SurfacemeltGreenlandIceSheet.m4a",
+            "wesn":"-73,-8,34,40"
          },
          {
             "name":"Velocity of the Greenland Ice Sheet",
@@ -1061,7 +1068,8 @@ var mapOverlays =
             "scale":true,
             "scalePath":"http://app.earth-observer.org/data/basemaps/images/arctic/Greenland/GreenlandIceFlowVelocityNASA_320/GreenlandIceSheetVelocityLegend.scl",
             "aboutAlertURL":"http://app.earth-observer.org/data/about/About_GreenlandIceVelocity.txt",
-            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_GreenlandIceVelocity.m4a"
+            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_GreenlandIceVelocity.m4a",
+            "wesn":"-73,-8,34,40"
          },
          {
             "name":"Elevation change of Greenland Ice Sheet",
@@ -1081,7 +1089,8 @@ var mapOverlays =
             "scale":true,
             "scalePath":"http://app.earth-observer.org/data/basemaps/images/arctic/Greenland/BeaIceThicknessChangeTiles_320/BeaIceThicknessChangeLegend.scl",
             "aboutAlertURL":"http://app.earth-observer.org/data/about/About_ChangesGreenlandIceSheetElevations.txt",
-            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_ChangesGreenlandIceSheetElevations.m4a"
+            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_ChangesGreenlandIceSheetElevations.m4a",
+            "wesn":"-73,-8,34,40"
          },
          {
             "name":"Elevation change of Greenland Ice Sheet (2003 - 2007)",
@@ -1106,7 +1115,8 @@ var mapOverlays =
             "hideOpacitySlider":true,
             "hideScaleBar":true,
             "aboutAlertURL":"http://app.earth-observer.org/data/about/About_ChangesGreenlandIceSheetElevations.txt",
-            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_ChangesGreenlandIceSheetElevations.m4a"
+            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_ChangesGreenlandIceSheetElevations.m4a",
+            "wesn":"-73,-8,34,40"
          },
          {
             "name":"Greenland total decadal ice loss ",
@@ -1126,7 +1136,8 @@ var mapOverlays =
             "scale":false,
             "scalePath":"http://app.earth-observer.org/data/basemaps/images/arctic/GreenlandGrace_2004-2012_320/grace_greenland_2004_2012_legend.scl",
             "aboutAlertURL":"http://app.earth-observer.org/data/about/About_GreenlandMassLoss.txt",
-            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_MassLossGreenland.m4a"
+            "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_MassLossGreenland.m4a",
+            // "wesn":"-73,-8,34,40"
          },
          {
             "name":"Greenland year by year ice loss",
@@ -1877,7 +1888,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                },
                {
                   "type":"overlay_sequence",
@@ -1888,7 +1899,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                }
             ]
          },
@@ -1917,7 +1928,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                },
                {
                   "type":"overlay_sequence",
@@ -1928,7 +1939,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                }
             ]
          },
@@ -1957,7 +1968,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                },
                {
                   "type":"arcgis_tile_256",
@@ -1967,7 +1978,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                }
             ]
          },
@@ -1996,7 +2007,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                },
                {
                   "type":"arcgis_tile_256",
@@ -2006,7 +2017,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                }
             ]
          },
@@ -2035,7 +2046,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                },
                {
                   "type":"arcgis_tile_256",
@@ -2045,7 +2056,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90"
+                  "wesn":"-160,-35,10,58"
                }
             ]
          }
@@ -2154,7 +2165,7 @@ var mapOverlays =
             "imageLink":"http://app.earth-observer.org/data/basemaps/tables/global/Atolls/Images/,13",
             "imageClickable":true,
             "imageSize":"250,250",
-            "wesn":"-180,180,-90,90",
+            "wesn":"-108,392,-71,80",
             "credit":"Wikipedia",
             "aboutAlertURL":"http://app.earth-observer.org/data/about/About_OceanAtolls.txt",
             "aboutAudioURL":"http://app.earth-observer.org/data/audio/Audio_OceanAtolls.m4a"
@@ -2226,7 +2237,7 @@ var mapOverlays =
                   "firstLevel":1,
                   "tileDelta":180,
                   "tileSize":256,
-                  "wesn":"-180,180,-90,90",
+                  "wesn":"-160,-35,10,58",
                   "credit":"NOAA National Hurricane Center",
                   "legend":true,
                   "legendPath":"http://app.earth-observer.org/data/basemaps/tables/global/HurricaneCountyStrikes/HurricaneCountyStrikesLegendTiny.png",
@@ -2333,7 +2344,7 @@ var mapOverlays =
                   "scaleSizeColumn":9,
                   "listOrder":"1,10,11,4,6",
                   "listUnits":"NULL,NULL,NULL,NULL,mph",
-                  "wesn":"-180,180,-90,90",
+                  "wesn":"34,160,-11,45",
                   "credit":"Wikipedia",
                   "legend":false,
                   "iPhoneLegend":false,
@@ -2731,7 +2742,7 @@ var mapOverlays =
                   "scaleSizeColumn":13,
                   "listOrder":"16,1,12,4,5,9",
                   "listUnits":"NULL,NULL,NULL,km,NULL,m",
-                  "wesn":"-180,180,-90,90",
+                  "wesn":"-63,438,-72,80",
                   "credit":"Tsunami Laboratory, ICM&MG",
                   "legend":false,
                   "iPhoneLegend":false,
@@ -2755,7 +2766,7 @@ var mapOverlays =
                   "scaleSizeColumn":7,
                   "listOrder":"1,5,7,8,10",
                   "listUnits":"NULL,NULL,NULL,m,NULL",
-                  "wesn":"-180,180,-90,90",
+                  "wesn":"-34,90,2.3,53",
                   "credit":"Tsunami Laboratory, ICM&MG",
                   "legend":false,
                   "iPhoneLegend":false,
@@ -2779,7 +2790,7 @@ var mapOverlays =
                   "scaleSizeColumn":7,
                   "listOrder":"1,5,6,8,10",
                   "listUnits":"NULL,NULL,NULL,m,NULL",
-                  "wesn":"-180,180,-90,90",
+                  "wesn":"-140,-15,-15,41",
                   "credit":"Tsunami Laboratory, ICM&MG",
                   "legend":false,
                   "iPhoneLegend":false,
@@ -2858,7 +2869,7 @@ var mapOverlays =
                         "firstLevel":1,
                         "tileDelta":180,
                         "tileSize":256,
-                        "wesn":"-180,180,-90,90"
+                        "wesn":"-121,-60,11,39"
                      },
                      {
                         "type":"table",
@@ -2870,7 +2881,7 @@ var mapOverlays =
                         "scaleSizeColumn":5,
                         "listOrder":"1,2,3,6,7,5,4",
                         "listUnits":"NULL,NULL,NULL,NULL,NULL,m,ft",
-                        "wesn":"-180,180,-90,90"
+                        "wesn":"-121,-60,11,39"
                      }
                   ]
                },
@@ -2900,7 +2911,7 @@ var mapOverlays =
                         "firstLevel":1,
                         "tileDelta":180,
                         "tileSize":256,
-                        "wesn":"-180,180,-90,90"
+                        "wesn":"-160,-35,10,58"
                      },
                      {
                         "type":"overlay_sequence",
@@ -2911,7 +2922,7 @@ var mapOverlays =
                         "firstLevel":1,
                         "tileDelta":180,
                         "tileSize":256,
-                        "wesn":"-180,180,-90,90"
+                        "wesn":"-160,-35,10,58"
                      }
                   ]
                },
@@ -2941,7 +2952,7 @@ var mapOverlays =
                         "firstLevel":1,
                         "tileDelta":180,
                         "tileSize":256,
-                        "wesn":"-180,180,-90,90"
+                        "wesn":"-68.5,-64.5,17,19"
                      },
                      {
                         "type":"overlay_sequence",
@@ -2952,7 +2963,7 @@ var mapOverlays =
                         "firstLevel":1,
                         "tileDelta":180,
                         "tileSize":256,
-                        "wesn":"-180,180,-90,90"
+                        "wesn":"-68.5,-64.5,17,19"
                      }
                   ]
                },
@@ -2978,7 +2989,7 @@ var mapOverlays =
                         "firstLevel":1,
                         "tileDelta":180,
                         "tileSize":256,
-                        "wesn":"-180,180,-90,90"
+                        "wesn":"-250,3,-30,66"
                      },
                      {
                         "type":"table",

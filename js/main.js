@@ -678,6 +678,7 @@ function displayLayer(layer, overlay, removeOldLayers) {
     if (map.getView().getProjection() != merc_proj) switchProjection(0); 
   }
 
+
   //add the new layer to the map
   map.addLayer(layer);
 
@@ -716,6 +717,16 @@ function displayLayer(layer, overlay, removeOldLayers) {
     map.getView().setMinZoom(1);
   } else {
     map.getView().setMinZoom(params.zoom  - mobileZoomAdjust);
+  }
+  if (overlay.wesn && removeOldLayers) {
+    var wesn = overlay.wesn.split(',');
+    var extent = ol.proj.transformExtent(
+      [parseInt(wesn[1]), parseInt(wesn[2]), parseInt(wesn[0]), parseInt(wesn[3])],
+      "EPSG:4326", map.getView().getProjection()
+    );
+
+    map.getView().fit( extent, map.getSize() );
+    map2.getView().fit( extent, map2.getSize() );
   }
 
   //on map 2 (the hidden map), just display top layer
