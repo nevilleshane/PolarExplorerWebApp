@@ -39,7 +39,7 @@ var mapOverlays =
             "showSeabedNames":true,
             "showElevation":true,
             "type":"wms_512",
-            "source":"http://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?request=getmap&service=wms&version=1.1.1&layers=gebco_08_grid&srs=EPSG:4326&format=image/jpeg&width=512&height=512",
+            "source":"https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?request=getmap&service=wms&version=1.1.1&layers=gebco_08_grid&srs=EPSG:4326&format=image/jpeg&width=512&height=512",
             "info":"https://d1ubeg96lo3skd.cloudfront.net/data/web_pages/html/ElevationsBeneathSea.html",
             "imageType":".jpeg",
             "numLevels":4,
@@ -887,7 +887,7 @@ var mapOverlays =
             "firstRowUnique":false,
             "legendUnits":"mm/year",
             "source":"https://d1ubeg96lo3skd.cloudfront.net/data/basemaps/tables/global/PSMSL_TideStations/StationList_IdLatLonName.txt",
-            "info":"http://www.psmsl.org",
+            "info":"https://www.psmsl.org",
             "latitudeColumn":2,
             "longitudeColumn":3,
             "listOrder":"4",
@@ -3003,7 +3003,7 @@ var mapOverlays =
                         "symbolColorColumn":7,
                         "listOrder":"1,4,5,6,8,10,11",
                         "listUnits":"NULL,NULL,NULL,NULL,ft,NULL,NULL",
-                        "clickableLink":"http://en.wikipedia.org/wiki/,12",
+                        "clickableLink":"https://en.wikipedia.org/wiki/,12",
                         // "imageColumn":13,
                         // "imageLink":"https://www.stormsurge.noaa.gov/images/tracks/,13"
                      }
