@@ -147,7 +147,7 @@ $(document).ready(function() {
   scaleUnits = "";
   tablePopupObj = {};
   showSeabedNames = true;
-  webpages_url = "http://app.earth-observer.org/data/web_pages/html/";
+  webpages_url = "https://d1ubeg96lo3skd.cloudfront.net/data/web_pages/html/";
 
   // Populate the menu using the overlays in the mapOverlays.json file
   console.log(mapOverlays);
