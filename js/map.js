@@ -3,6 +3,8 @@ function MapClient(view, params) {
   gmrtUrl = "https://www.gmrt.org:443/services/PointServer";
   gmrtMapUrl = "https://www.gmrt.org/services/mapserver/";
   placeNamesUrl = "https://d1ubeg96lo3skd.cloudfront.net/data/overlays/WorldWFS";
+  cloudfront_url = "https://d1ubeg96lo3skd.cloudfront.net"
+  eo_url = "http://app.earth-observer.org"
 
   //set up the map
   var map = new ol.Map({
@@ -381,7 +383,7 @@ function displayOverlaySequence(overlay, removeOldLayers) {
       for (var i in lines) {
         var line = lines[i].split("\t");
         if (line[0] === "") continue;
-        var seq = {"label": line[0], "source": line[1]};
+        var seq = {"label": line[0], "source": line[1].replace(eo_url, cloudfront_url)};
         //combine the sequence object with the overlay object
         //so that we retain all information
         sequences.push(mergeObjects(seq, overlay));
