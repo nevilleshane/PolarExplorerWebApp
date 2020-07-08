@@ -46,8 +46,8 @@
   <script type="text/javascript">
     $(document).ready(function() {
 
-      var webpages_url = "http://app.earth-observer.org/data/web_pages/html/";
-      var basemap_url = "http://app.earth-observer.org/data/basemaps/gmrt/";
+      var webpages_url = "https://d1ubeg96lo3skd.cloudfront.net/data/web_pages/html/";
+      var basemap_url = "https://d1ubeg96lo3skd.cloudfront.net/data/basemaps/gmrt/";
 
       var topic = window.location.search.split("topic=")[1];
       if (topic) topic = topic.split("&")[0];
@@ -68,7 +68,7 @@
 
       //add our own css styling to the iframe contents
       var cssLink = document.createElement("link");
-      cssLink.href = "http://app.earth-observer.org/data/web_pages/webapp/info.css"; 
+      cssLink.href = "https://d1ubeg96lo3skd.cloudfront.net/data/web_pages/webapp/info.css"; 
       cssLink.rel = "stylesheet"; 
       cssLink.type = "text/css"; 
       $(this).contents().find("head").append(cssLink);
