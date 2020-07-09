@@ -41,7 +41,10 @@ function MapClient(view, params) {
         }
     })
   });
-  map.addLayer(gmrtLayer);
+  // temporary fix to allow data values on click while GMRT layer issues are being fixed.
+  if (view == 'map') {
+    map.addLayer(gmrtLayer);
+  }
 
   //add the scale line
   var scaleline = new ol.control.ScaleLine({target:"scaleline"});
@@ -564,7 +567,7 @@ function displayXBMap(overlay, removeOldLayers, sequence) {
     tileSize: [320,320]
   });
 
-  var source_url = overlay.source.replace("www.earth-observer", "app.earth-observer");
+  var source_url = overlay.source.replace("http://www.earth-observer", "https://d1ubeg96lo3skd.cloudfront.net");
   //make sure there is not a / and the end of the source URL
   if (source_url.slice(-1) == "/") {
     source_url = source_url.slice(0, -1);
