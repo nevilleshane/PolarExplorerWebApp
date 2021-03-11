@@ -41,10 +41,11 @@ function MapClient(view, params) {
         }
     })
   });
+  map.addLayer(gmrtLayer);
   // temporary fix to allow data values on click while GMRT layer issues are being fixed.
-  if (view == 'map') {
-    map.addLayer(gmrtLayer);
-  }
+ // if (view == 'map') {
+   // map.addLayer(gmrtLayer);
+  //}
 
   //add the scale line
   var scaleline = new ol.control.ScaleLine({target:"scaleline"});
