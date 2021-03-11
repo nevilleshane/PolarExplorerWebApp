@@ -567,7 +567,7 @@ function displayXBMap(overlay, removeOldLayers, sequence) {
     tileSize: [320,320]
   });
 
-  var source_url = overlay.source.replace("http://www.earth-observer", "https://d1ubeg96lo3skd.cloudfront.net");
+  var source_url = overlay.source.replace("http://www.earth-observer.org", "https://d1ubeg96lo3skd.cloudfront.net");
   //make sure there is not a / and the end of the source URL
   if (source_url.slice(-1) == "/") {
     source_url = source_url.slice(0, -1);
