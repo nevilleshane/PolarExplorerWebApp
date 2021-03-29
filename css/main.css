@@ -1335,3 +1335,13 @@ button {
     font-size: 90%;
   }
 }
+
+.popupimagetext {
+  position: absolute;
+  right: 96px;
+  top: 50px;
+  font-size: 26px;
+  line-height: 0;
+  color: white;
+  font-weight: bold;
+}

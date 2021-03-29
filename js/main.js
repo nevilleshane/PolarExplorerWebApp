@@ -218,24 +218,38 @@ $(document).ready(function() {
         else if (!tablePopupObj.image_base_url && tablePopupObj.image_url_property) {
           image_url = feature.get(tablePopupObj.image_url_property);
         }
-        if (image_url) content += "<a target='_blank' href='" + url + "'><img style='width:150px;height:150px;' src='" + image_url +"'></img></a><br/>";
-
-
-        for (var i in tablePopupObj.properties) {
-          var key = tablePopupObj.properties[i];
-          // make sure any keys which originally had duplicate names are renamed back to 
-          // their original vales by removing the #repeated_key# extension
-          var key_text = key.replace("#repeated_key#", "");
-          var value = feature.get(key);
-          var value_text = "n/a";
-          if (value) {
-            value_text = feature.get(key).replace("|", ",") + " " + tablePopupObj.units[i]; 
+        if (image_url) {
+          content += "<div align='center' style='width:270px;'>"
+          content += "<a target='_blank' href='" + url + "'><img style='width:150px;height:150px;' src='" + image_url +"'></img>";
+          var image_text_keys = tablePopupObj.image_text_keys
+          // image text for tidal stations
+          if (image_text_keys.length > 0 && tablePopupObj.layer == "Tide Station Histories") {
+            content += "<div align='center' class='popupimagetext' style='width:109px;'>"+feature.get(image_text_keys[0]);
+            content += "<p style='font-size: 18px;'>mm/year</p>";
+            content += "<p style='font-size: 12px;'>"+feature.get(image_text_keys[1])+"</p></div>";
           }
-          content +=  key_text + " = " + value_text + "<br/>";
+          content += "</a><br/>";
         }
-
-        if (url) content += "<a target='_blank' href='" + url + "'>More info</a>";
         
+        if (tablePopupObj.properties) {
+          content += "<div align='left'>"
+          for (var i in tablePopupObj.properties) {
+            var key = tablePopupObj.properties[i];
+            // make sure any keys which originally had duplicate names are renamed back to 
+            // their original vales by removing the #repeated_key# extension
+            var key_text = key.replace("#repeated_key#", "");
+            var value = feature.get(key);
+            var value_text = "n/a";
+            if (value) {
+              value_text = feature.get(key).replace("|", ",") + " " + tablePopupObj.units[i]; 
+            }
+            content +=  key_text + " = " + value_text + "<br/>";
+          }
+          if (url) content += "<a target='_blank' href='" + url + "'>More info</a>";
+          content += "</div>"
+        }
+        if (image_text_keys && image_text_keys.length > 0) content += "</div>";
+               
         content_element.innerHTML = content;
         table_popup_overlay.setPosition(feature_coord);
         $("#table-popup").css("width", "max-content");

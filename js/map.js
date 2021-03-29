@@ -740,7 +740,7 @@ function displayTable(overlay, removeOldLayers) {
   
       if (sizeCol) sizeColString = columns[sizeCol];
       if (colorCol) colorColString = columns[colorCol];
-      csv2geojson.csv2geojson(csvString, function(err, data) {
+      csv2geojson.csv2geojson(csvString, {latfield: columns[overlay.latitudeColumn-1], lonfield: columns[overlay.longitudeColumn-1], delimeter: ','}, function(err, data) {
         console.log(data);
         console.log(err);
 
@@ -788,13 +788,25 @@ function displayTable(overlay, removeOldLayers) {
           }
         }
 
-        tablePopupObj = {"properties": properties, 
+        // used by tidal stations layer
+        var image_text_keys = [];
+        if (overlay.imageTextCols) {
+          var image_text_cols = overlay.imageTextCols.split(",");
+          for (var i in image_text_cols){
+            var ind = image_text_cols[i] - 1;
+            image_text_keys.push(columns[ind])
+          }
+        }
+
+        tablePopupObj = {"layer": overlay.title,
+                         "properties": properties, 
                          "units": units,
                          "list_order": list_order, 
                          "base_url": url,
                          "url_property": url_property,
                          "image_base_url": image_url,
-                         "image_url_property": image_url_property};
+                         "image_url_property": image_url_property,
+                         "image_text_keys": image_text_keys};
         console.log(tablePopupObj);
 
         displayLayer(tableLayer, overlay, removeOldLayers);
