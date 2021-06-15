@@ -34,18 +34,18 @@ function MapClient(view, params) {
     title: "GMRT Synthesis",
     source: new ol.source.TileWMS({
         url: gmrtMapUrl + params.url_ext,
-        // crossOrigin: 'anonymous',
+        crossOrigin: 'anonymous',
         wrapX: true,
         params: {
           layers: params.layer,
         }
     })
   });
-  map.addLayer(gmrtLayer);
+  // map.addLayer(gmrtLayer);
   // temporary fix to allow data values on click while GMRT layer issues are being fixed.
- // if (view == 'map') {
-   // map.addLayer(gmrtLayer);
-  //}
+ if (view == 'map') {
+   map.addLayer(gmrtLayer);
+  }
 
   //add the scale line
   var scaleline = new ol.control.ScaleLine({target:"scaleline"});
